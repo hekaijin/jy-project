@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsd.dao.wagecalculation.WageRulesMapper" >
+  <resultMap id="BaseResultMap" type="com.hsd.entity.wagecalculation.WageRules" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="rulesName" property="rulesname" jdbcType="VARCHAR" />
+    <result column="rulesGenre" property="rulesgenre" jdbcType="BIT" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="workDays" property="workdays" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, rulesName, rulesGenre, userId, workDays, createDate, flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hsd.entity.wagecalculation.WageRulesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wageRules
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wageRules
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wageRules
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hsd.entity.wagecalculation.WageRules" >
+    insert into wageRules (id, rulesName, rulesGenre, 
+      userId, workDays, createDate, 
+      flag)
+    values (#{id,jdbcType=VARCHAR}, #{rulesname,jdbcType=VARCHAR}, #{rulesgenre,jdbcType=BIT}, 
+      #{userid,jdbcType=INTEGER}, #{workdays,jdbcType=INTEGER}, #{createdate,jdbcType=DATE}, 
+      #{flag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsd.entity.wagecalculation.WageRules" >
+    insert into wageRules
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rulesname != null" >
+        rulesName,
+      </if>
+      <if test="rulesgenre != null" >
+        rulesGenre,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="workdays != null" >
+        workDays,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="rulesname != null" >
+        #{rulesname,jdbcType=VARCHAR},
+      </if>
+      <if test="rulesgenre != null" >
+        #{rulesgenre,jdbcType=BIT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="workdays != null" >
+        #{workdays,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsd.entity.wagecalculation.WageRules" >
+    update wageRules
+    <set >
+      <if test="rulesname != null" >
+        rulesName = #{rulesname,jdbcType=VARCHAR},
+      </if>
+      <if test="rulesgenre != null" >
+        rulesGenre = #{rulesgenre,jdbcType=BIT},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="workdays != null" >
+        workDays = #{workdays,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsd.entity.wagecalculation.WageRules" >
+    update wageRules
+    set rulesName = #{rulesname,jdbcType=VARCHAR},
+      rulesGenre = #{rulesgenre,jdbcType=BIT},
+      userId = #{userid,jdbcType=INTEGER},
+      workDays = #{workdays,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=DATE},
+      flag = #{flag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

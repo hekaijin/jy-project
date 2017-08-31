@@ -1,0 +1,46 @@
+/* 
+* @Author: anchen
+* @Date:   2017-01-09 12:43:46
+* @Last Modified by:   anchen
+* @Last Modified time: 2017-01-09 13:20:09
+*/
+.by_background{
+    width: 100%;
+    height: 100%;
+     background: url(../image/background2.png)no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    position: relative;
+}
+.by_background img{
+    width: 50%;
+    position: absolute;
+    left: 72px;
+    bottom: 50px;
+}
+.pop_by{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.48);
+    z-index: 1;
+    display: none;
+}
+.pop_by img{
+    right: 6px;
+    position: absolute;
+    width: 50px;
+}
+.pop_by p{
+     position: absolute;
+    z-index: 100;
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    text-align: right;
+    right: 20px;
+    top: 45px;
+    font-size: 17px;
+}

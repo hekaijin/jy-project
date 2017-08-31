@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsd.dao.fundstatement.ContractPayMapper" >
+  <resultMap id="BaseResultMap" type="com.hsd.entity.fundstatement.ContractPay" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FieldID" property="fieldid" jdbcType="INTEGER" />
+    <result column="ContractID" property="contractid" jdbcType="INTEGER" />
+    <result column="ContractName" property="contractname" jdbcType="NVARCHAR" />
+    <result column="ContractMCDay" property="contractmcday" jdbcType="INTEGER" />
+    <result column="ContractMCDate" property="contractmcdate" jdbcType="TIMESTAMP" />
+    <result column="RealityMCDate" property="realitymcdate" jdbcType="TIMESTAMP" />
+    <result column="RealityMC" property="realitymc" jdbcType="DECIMAL" />
+    <result column="Subtract" property="subtract" jdbcType="DECIMAL" />
+    <result column="AgencyFund" property="agencyfund" jdbcType="DECIMAL" />
+    <result column="SubtractCount" property="subtractcount" jdbcType="INTEGER" />
+    <result column="OverdueCount" property="overduecount" jdbcType="INTEGER" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="Remark" property="remark" jdbcType="NVARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FieldID, ContractID, ContractName, ContractMCDay, ContractMCDate, RealityMCDate, 
+    RealityMC, Subtract, AgencyFund, SubtractCount, OverdueCount, Status, Remark, CreateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hsd.entity.fundstatement.ContractPayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ContractPay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ContractPay
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ContractPay
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsd.entity.fundstatement.ContractPay" >
+    insert into ContractPay (ID, FieldID, ContractID, 
+      ContractName, ContractMCDay, ContractMCDate, 
+      RealityMCDate, RealityMC, Subtract, 
+      AgencyFund, SubtractCount, OverdueCount, 
+      Status, Remark, CreateDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{fieldid,jdbcType=INTEGER}, #{contractid,jdbcType=INTEGER}, 
+      #{contractname,jdbcType=NVARCHAR}, #{contractmcday,jdbcType=INTEGER}, #{contractmcdate,jdbcType=TIMESTAMP}, 
+      #{realitymcdate,jdbcType=TIMESTAMP}, #{realitymc,jdbcType=DECIMAL}, #{subtract,jdbcType=DECIMAL}, 
+      #{agencyfund,jdbcType=DECIMAL}, #{subtractcount,jdbcType=INTEGER}, #{overduecount,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=NVARCHAR}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsd.entity.fundstatement.ContractPay" >
+    insert into ContractPay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fieldid != null" >
+        FieldID,
+      </if>
+      <if test="contractid != null" >
+        ContractID,
+      </if>
+      <if test="contractname != null" >
+        ContractName,
+      </if>
+      <if test="contractmcday != null" >
+        ContractMCDay,
+      </if>
+      <if test="contractmcdate != null" >
+        ContractMCDate,
+      </if>
+      <if test="realitymcdate != null" >
+        RealityMCDate,
+      </if>
+      <if test="realitymc != null" >
+        RealityMC,
+      </if>
+      <if test="subtract != null" >
+        Subtract,
+      </if>
+      <if test="agencyfund != null" >
+        AgencyFund,
+      </if>
+      <if test="subtractcount != null" >
+        SubtractCount,
+      </if>
+      <if test="overduecount != null" >
+        OverdueCount,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fieldid != null" >
+        #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="contractid != null" >
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="contractname != null" >
+        #{contractname,jdbcType=NVARCHAR},
+      </if>
+      <if test="contractmcday != null" >
+        #{contractmcday,jdbcType=INTEGER},
+      </if>
+      <if test="contractmcdate != null" >
+        #{contractmcdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realitymcdate != null" >
+        #{realitymcdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realitymc != null" >
+        #{realitymc,jdbcType=DECIMAL},
+      </if>
+      <if test="subtract != null" >
+        #{subtract,jdbcType=DECIMAL},
+      </if>
+      <if test="agencyfund != null" >
+        #{agencyfund,jdbcType=DECIMAL},
+      </if>
+      <if test="subtractcount != null" >
+        #{subtractcount,jdbcType=INTEGER},
+      </if>
+      <if test="overduecount != null" >
+        #{overduecount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsd.entity.fundstatement.ContractPay" >
+    update ContractPay
+    <set >
+      <if test="fieldid != null" >
+        FieldID = #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="contractid != null" >
+        ContractID = #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="contractname != null" >
+        ContractName = #{contractname,jdbcType=NVARCHAR},
+      </if>
+      <if test="contractmcday != null" >
+        ContractMCDay = #{contractmcday,jdbcType=INTEGER},
+      </if>
+      <if test="contractmcdate != null" >
+        ContractMCDate = #{contractmcdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realitymcdate != null" >
+        RealityMCDate = #{realitymcdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realitymc != null" >
+        RealityMC = #{realitymc,jdbcType=DECIMAL},
+      </if>
+      <if test="subtract != null" >
+        Subtract = #{subtract,jdbcType=DECIMAL},
+      </if>
+      <if test="agencyfund != null" >
+        AgencyFund = #{agencyfund,jdbcType=DECIMAL},
+      </if>
+      <if test="subtractcount != null" >
+        SubtractCount = #{subtractcount,jdbcType=INTEGER},
+      </if>
+      <if test="overduecount != null" >
+        OverdueCount = #{overduecount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsd.entity.fundstatement.ContractPay" >
+    update ContractPay
+    set FieldID = #{fieldid,jdbcType=INTEGER},
+      ContractID = #{contractid,jdbcType=INTEGER},
+      ContractName = #{contractname,jdbcType=NVARCHAR},
+      ContractMCDay = #{contractmcday,jdbcType=INTEGER},
+      ContractMCDate = #{contractmcdate,jdbcType=TIMESTAMP},
+      RealityMCDate = #{realitymcdate,jdbcType=TIMESTAMP},
+      RealityMC = #{realitymc,jdbcType=DECIMAL},
+      Subtract = #{subtract,jdbcType=DECIMAL},
+      AgencyFund = #{agencyfund,jdbcType=DECIMAL},
+      SubtractCount = #{subtractcount,jdbcType=INTEGER},
+      OverdueCount = #{overduecount,jdbcType=INTEGER},
+      Status = #{status,jdbcType=INTEGER},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!--<select id="selectAllProjectIncomeTotalMoney" resultType="string">-->
+   	<!--select nums=( SELECT SUM(cast (c.RealityMC as DECIMAL(18,2)) )FROM ContractPay c WHERE c.deleted !=1) +-->
+				<!--( SELECT SUM(cast (c.Subtract as DECIMAL(18,2)) )FROM ContractPay c WHERE c.deleted !=1) +-->
+				<!--( SELECT SUM(cast (c.AgencyFund as DECIMAL(18,2)))FROM ContractPay c WHERE c.deleted !=1)+-->
+				<!--(SELECT SUM(cast (p.money as DECIMAL(18,2))) FROM projectIncome  p WHERE p.flag=0)-->
+  <!--</select>-->
+  <select id="selectAllProjectIncomeTotalMoney" resultType="string">
+    select nums=( SELECT SUM(cast (c.RealityMC as DECIMAL(18,2)) )FROM ContractPay c,Field f WHERE c.deleted !=1 AND f.deleted!=1 AND c.FieldID=f.FieldID
+              <if test="fieldId !=null and fieldId!='' ">
+                 AND f.FieldID=#{fieldId,jdbcType=VARCHAR}
+              </if>
+              ) +
+				( SELECT SUM(cast (c.Subtract as DECIMAL(18,2)) )FROM ContractPay c,Field f  WHERE c.deleted !=1 AND f.deleted!=1  AND c.FieldID=f.FieldID
+              <if test="fieldId !=null and fieldId!='' ">
+                AND f.FieldID=#{fieldId,jdbcType=VARCHAR}
+              </if>
+              ) +
+				( SELECT SUM(cast (c.AgencyFund as DECIMAL(18,2)))FROM ContractPay c,Field f  WHERE c.deleted !=1 AND f.deleted!=1  AND c.FieldID=f.FieldID
+              <if test="fieldId !=null and fieldId!='' ">
+                AND f.FieldID=#{fieldId,jdbcType=VARCHAR}
+              </if>
+              )+
+				(SELECT SUM(cast (p.money as DECIMAL(18,2))) FROM projectIncome  p,Field f  WHERE p.flag=0 AND f.deleted!=1  AND p.fieldID=f.FieldID
+              <if test="fieldId !=null and fieldId!='' ">
+                AND f.FieldID=#{fieldId,jdbcType=VARCHAR}
+              </if>
+              )
+  </select>
+  
+  
+  <select id="selectProjectIncomeDetail" resultType="com.hsd.vo.RankingDetailVo">
+	SELECT list.name,abs(sum(cast(list.num1 as DECIMAL(18,2))+cast(list.num2 as DECIMAL(18,2)))) money FROM (
+		SELECT f.Name,sum(cast(c.RealityMC as DECIMAL(18,2))+cast(c.Subtract as DECIMAL(18,2))+cast(c.AgencyFund as DECIMAL(18,2))) num1,0 num2 
+		FROM ContractPay c, Field f 
+		WHERE 
+		f.Deleted != 1 
+		AND c.Deleted!=1 
+		AND c.FieldID = f.FieldID 
+		GROUP BY f.name 
+		
+		UNION ALL
+		
+		SELECT f.Name,0 num1, sum(cast(p.money as DECIMAL(18,2)))num2 FROM projectIncome p,Field f
+		WHERE 
+		p.flag=0 
+		AND f.Deleted != 1 
+		AND p.fieldID=f.FieldID
+		GROUP BY f.name
+	)list
+	WHERE  cast(list.num1 as DECIMAL(18,2))+cast(list.num2 as DECIMAL(18,2))>0
+	GROUP BY list.name
+	ORDER BY money DESC
+  </select>
+  
+   <select id="selectProjectMonthIncomeDetails" resultType="com.hsd.vo.ProjectMonthIncomeVo">
+		SELECT 
+			list.name,
+			SUM(cast(list.shouldMoney as DECIMAL(18,2))) shouldMoney,
+			SUM(cast (list.realityMoney as DECIMAL(18,2))) realityMoney,
+			SUM(cast(list.shouldMoney as DECIMAL(18,2))-cast (list.realityMoney as DECIMAL(18,2))) debtMoney,
+			list.[month] 
+		FROM(
+		
+					SELECT
+							f.Name name,
+							0 shouldMoney,
+							SUM(cast (c.RealityMC  as DECIMAL(18,2))) realityMoney,
+							month(c.RealityMCDate) month
+					 
+						FROM
+							ContractPay c
+						INNER JOIN Field f ON c.FieldID = f.FieldID 
+						WHERE
+							C.Deleted != 1
+						AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+						AND c.RealityMCDate IS NOT NULL
+						GROUP BY f.name ,month(c.RealityMCDate)
+						 
+				UNION ALL 
+				SELECT f.Name name,
+							0 shouldMoney,
+							sum(cast(p.money as DECIMAL(18,2))) realityMoney,
+							month(p.[date])
+				FROM projectIncome p,Field f
+				WHERE 
+					p.flag=0 AND f.Deleted!=1
+				AND p.fieldID=f.FieldID
+				AND YEAR (p.[date]) = YEAR (GETDATE())
+				GROUP BY f.Name,month(p.[date])
+				
+				UNION ALL 
+				SELECT 
+					f.Name,
+					sum(cast(r.predictIncome as DECIMAL(18,2))) shouldMoney,
+					0 realityMoney,
+					month(r.createDate)
+				FROM RedLine r,Field f
+				WHERE
+				r.flag=0
+				AND f.Deleted !=1
+				AND r.FieldID=f.FieldID
+				AND YEAR (r.createDate) = YEAR (GETDATE())
+				GROUP BY f.Name,month(r.createDate)	
+		
+		)list
+		 WHERE
+		list.name  LIKE '%'+#{projectName,jdbcType=VARCHAR}+'%'
+		GROUP BY list.name,list.[month]
+		ORDER BY list.[month] asc 
+  
+  </select>
+</mapper>

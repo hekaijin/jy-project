@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="world-web" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<!-- 测试环境注册中心地址 -->
+<!--   	<dubbo:registry protocol="zookeeper" address="zookeeper://192.168.1.124:2181" /> -->
+	<dubbo:registry protocol="zookeeper" address="zookeeper://120.76.239.30:2181" />
+
+
+	<!-- 用户服务接口 -->
+	<dubbo:reference interface="com.hsd.service.UserService" id="userService" check="false" />
+	
+	<dubbo:reference interface="com.hsd.service.cell.comm.AreaInfoService" id="areaInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.comm.CityInfoService" id="cityInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.comm.ProvinceInfoService" id="provinceInfoService" check="false" />
+	
+	<dubbo:reference interface="com.hsd.service.cell.BindOnAccountService" id="bindOnAccountService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.BuildingInfoService" id="buildingInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.CellInfoService" id="cellInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.CellSystemAdministratorService" id="cellSystemAdministratorService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.ChargeStandardService" id="chargeStandardService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.CollectionService" id="collectionService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.ComAndSuggService" id="comAndSuggService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.CommunityAdminListService" id="communityAdminListService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.GiftService" id="giftService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.GuestRegistrationService" id="guestRegistrationService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.HomeLifeSurveyService" id="homeLifeSurveyService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.MedicalRecordInfoService" id="medicalRecordInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.MyGiftService" id="myGiftService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.NoticeInfoService" id="noticeInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.PaymentDateTypeService" id="paymentDateTypeService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.PaymentDetailService" id="paymentDetailService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.PaymentKeyService" id="paymentKeyService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.PaymentNumberService" id="paymentNumberService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.PaysService" id="paysService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.PayTypeService" id="payTypeService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.RoomInfoService" id="roomInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.RoomOwnerService" id="roomOwnerService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.RoomTypeChargeService" id="roomTypeChargeService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.RoomTypeService" id="roomTypeService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.DepositService" id="depositService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.RepairThePropertyService" id="repairThePropertyService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.WaterAndElectricityService" id="waterAndElectricityService" check="false" />
+	<dubbo:reference interface="com.hsd.service.electricity.WaterAndRecordService" id="waterAndRecordService" check="false" />
+	<dubbo:reference interface="com.hsd.service.feedback.FeedbackPropertyService" id="feedbackPropertyService" check="false" />
+	<dubbo:reference interface="com.hsd.service.comment.CommentService" id="commentService" check="false" />
+	<dubbo:reference interface="com.hsd.service.advance.AdvanceNumberManagerService" id="advanceNumberManagerService" check="false" />
+	<dubbo:reference interface="com.hsd.service.advance.AdvancePaymentService" id="advancePaymentService" check="false" />
+	<dubbo:reference interface="com.hsd.service.advance.PayBackRecordService" id="payBackRecordService" check="false" />
+	<dubbo:reference interface="com.hsd.service.servicestar.ServiceStarService" id="serviceStarService" check="false" />
+	<dubbo:reference interface="com.hsd.service.servicestar.ServiceStarVoteService" id="serviceStarVoteService" check="false" />
+	<dubbo:reference interface="com.hsd.service.visitor.VisitorService" id="isitorService" check="false" />
+	<dubbo:reference interface="com.hsd.service.visitor.VisitorDetailService" id="visitorDetailService" check="false" />
+	
+	<!-- IC卡申请 -->
+	<dubbo:reference interface="com.hsd.service.ic.IcApplyService" id="icApplyService" check="false" />
+	
+	<!-- 角色权限接口 -->
+	<dubbo:reference interface="com.hsd.service.cell.comm.MenuInfoService" id="menuInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.comm.RoleMenuService" id="roleMenuService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.comm.RoleNameService" id="roleNameService" check="false" />
+	<dubbo:reference interface="com.hsd.service.cell.comm.UserRoleService" id="userRoleService" check="false" />
+	
+	<!-- 业主 家庭成员接口 -->
+	<dubbo:reference interface="com.hsd.service.cell.OwnerInfoService" id="ownerInfoService" check="false" />
+
+	<dubbo:reference interface="com.hsd.service.user.CellOwnerLoginService" id="cellOwnerLoginService" check="false" />
+	
+	<!-- 停车费接口 -->
+	<dubbo:reference interface="com.hsd.service.cell.VehicleInfoService" id="vehicleInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.parkingraterecord.ParkingRateRecordService" id="parkingRateRecordService" check="false" />
+	<dubbo:reference interface="com.hsd.service.log.OperationLogService" id="operationLogService" check="false" />
+	<dubbo:reference interface="com.hsd.service.log.AbnormalLogService" id="abnormalLogService" check="false" />
+	<!-- 手机充值接口 -->
+	<dubbo:reference interface="com.hsd.service.recharge.TeleRechargeService" id="teleRechargeService" check="false" />
+	<dubbo:reference interface="com.hsd.service.recharge.TeleRechargeNumberService" id="teleRechargeNumberService" check="false" />
+	<dubbo:reference interface="com.hsd.service.recharge.TeleRechargeHistoryRecordService" id="teleRechargeHistoryRecordService" check="false" />
+	<!-- 便民服务 -->
+	<dubbo:reference interface="com.hsd.service.convenience.ConvenienceService" id="convenienceService" check="false" />
+	<!-- 放行条 -->
+	<dubbo:reference interface="com.hsd.service.releasebar.ReleaseBarService" id="releaseBarService" check="false" />
+	<!-- 支付订单信息接口 -->
+	<dubbo:reference interface="com.hsd.service.advance.AdvancePaymentNumberService" id="advancePaymentNumberService" check="false" />
+	<dubbo:reference interface="com.hsd.service.deposit.DepositNumberService" id="depositNumberService" check="false" />
+	<dubbo:reference interface="com.hsd.service.payment.PaymentDetailNumberService" id="paymentDetailNumberService" check="false" />
+	<dubbo:reference interface="com.hsd.service.electricity.WaterAndElectricityNumberService" id="waterAndElectricityNumberService" check="false" />
+	<!-- 生活圈接口 -->
+	<dubbo:reference interface="com.hsd.service.circle.CircleActivityInfoService" id="circleActivityInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleCollectionInfoService" id="circleCollectionInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleInfoService" id="circleInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleJoinInfoService" id="circleJoinInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleTopicInfoService" id="circleTopicInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleTopicReplyInfoService" id="circleTopicReplyInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleActivityJoinInfoService" id="circleActivityJoinInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.circle.CircleLikesInfoService" id="circleLikesInfoService" check="false" />
+	
+	<dubbo:reference interface="com.hsd.service.user.CellOwnerAuditService" id="cellOwnerAuditService" check="false" />
+	
+	<!-- 加油卡充值 -->
+	<dubbo:reference interface="com.hsd.service.fuel.FuelRechargeRecordService" id="fuelRechargeRecordService" check="false" />
+	<dubbo:reference interface="com.hsd.service.fuel.FuelInfoService" id="fuelInfoService" check="false" />
+	
+	<!-- 其他缴费 -->
+	<dubbo:reference interface="com.hsd.service.otherspayment.OthersPaymentService" id="othersPaymentService" check="false" />
+	
+	<!-- 车位 -->
+	<dubbo:reference interface="com.hsd.service.car.CarInfoService" id="carInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.car.CarOwnerInfoService" id="carOwnerInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.car.CarParkingInfoService" id="carParkingInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.car.ParkingInfoService" id="parkingInfoService" check="false" />
+	<dubbo:reference interface="com.hsd.service.car.ParkingRecordService" id="parkingRecordService" check="false" />
+	
+	<!-- 支付交易记录 -->
+	<dubbo:reference interface="com.hsd.service.number.PayNumberRecordService" id="payNumberRecordService" check="false" />
+	
+</beans>  

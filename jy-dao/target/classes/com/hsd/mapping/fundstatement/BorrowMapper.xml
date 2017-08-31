@@ -1,0 +1,2436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsd.dao.fundstatement.BorrowMapper" >
+  <resultMap id="BaseResultMap" type="com.hsd.entity.fundstatement.Borrow" >
+    <id column="BorrowID" property="borrowid" jdbcType="INTEGER" />
+    <result column="UserID" property="userid" jdbcType="INTEGER" />
+    <result column="Reason" property="reason" jdbcType="NVARCHAR" />
+    <result column="Amount" property="amount" jdbcType="DECIMAL" />
+    <result column="PhotoPath" property="photopath" jdbcType="NVARCHAR" />
+    <result column="CheckStatus" property="checkstatus" jdbcType="INTEGER" />
+    <result column="PayStatus" property="paystatus" jdbcType="INTEGER" />
+    <result column="TakeUserName" property="takeusername" jdbcType="NVARCHAR" />
+    <result column="TakeUser" property="takeuser" jdbcType="INTEGER" />
+    <result column="TakeField" property="takefield" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="NVARCHAR" />
+    <result column="Deleted" property="deleted" jdbcType="BIT" />
+    <result column="ProcessID" property="processid" jdbcType="INTEGER" />
+    <result column="SeqNo" property="seqno" jdbcType="NVARCHAR" />
+    <result column="PayTime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="PayUser" property="payuser" jdbcType="NVARCHAR" />
+    <result column="PrintCount" property="printcount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BorrowID, UserID, Reason, Amount, PhotoPath, CheckStatus, PayStatus, TakeUserName, 
+    TakeUser, TakeField, CreateTime, Deleted, ProcessID, SeqNo, PayTime, PayUser, PrintCount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hsd.entity.fundstatement.BorrowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from Borrow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Borrow
+    where BorrowID = #{borrowid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Borrow
+    where BorrowID = #{borrowid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsd.entity.fundstatement.Borrow" >
+    insert into Borrow (BorrowID, UserID, Reason, 
+      Amount, PhotoPath, CheckStatus, 
+      PayStatus, TakeUserName, TakeUser, 
+      TakeField, CreateTime, Deleted, 
+      ProcessID, SeqNo, PayTime, 
+      PayUser, PrintCount)
+    values (#{borrowid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{reason,jdbcType=NVARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{photopath,jdbcType=NVARCHAR}, #{checkstatus,jdbcType=INTEGER}, 
+      #{paystatus,jdbcType=INTEGER}, #{takeusername,jdbcType=NVARCHAR}, #{takeuser,jdbcType=INTEGER}, 
+      #{takefield,jdbcType=INTEGER}, #{createtime,jdbcType=NVARCHAR}, #{deleted,jdbcType=BIT}, 
+      #{processid,jdbcType=INTEGER}, #{seqno,jdbcType=NVARCHAR}, #{paytime,jdbcType=TIMESTAMP}, 
+      #{payuser,jdbcType=NVARCHAR}, #{printcount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsd.entity.fundstatement.Borrow" >
+    insert into Borrow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="borrowid != null" >
+        BorrowID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="reason != null" >
+        Reason,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="photopath != null" >
+        PhotoPath,
+      </if>
+      <if test="checkstatus != null" >
+        CheckStatus,
+      </if>
+      <if test="paystatus != null" >
+        PayStatus,
+      </if>
+      <if test="takeusername != null" >
+        TakeUserName,
+      </if>
+      <if test="takeuser != null" >
+        TakeUser,
+      </if>
+      <if test="takefield != null" >
+        TakeField,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="deleted != null" >
+        Deleted,
+      </if>
+      <if test="processid != null" >
+        ProcessID,
+      </if>
+      <if test="seqno != null" >
+        SeqNo,
+      </if>
+      <if test="paytime != null" >
+        PayTime,
+      </if>
+      <if test="payuser != null" >
+        PayUser,
+      </if>
+      <if test="printcount != null" >
+        PrintCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="borrowid != null" >
+        #{borrowid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=NVARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="photopath != null" >
+        #{photopath,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="takeusername != null" >
+        #{takeusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="takeuser != null" >
+        #{takeuser,jdbcType=INTEGER},
+      </if>
+      <if test="takefield != null" >
+        #{takefield,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="processid != null" >
+        #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="seqno != null" >
+        #{seqno,jdbcType=NVARCHAR},
+      </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payuser != null" >
+        #{payuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="printcount != null" >
+        #{printcount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsd.entity.fundstatement.Borrow" >
+    update Borrow
+    <set >
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        Reason = #{reason,jdbcType=NVARCHAR},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="photopath != null" >
+        PhotoPath = #{photopath,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        CheckStatus = #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        PayStatus = #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="takeusername != null" >
+        TakeUserName = #{takeusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="takeuser != null" >
+        TakeUser = #{takeuser,jdbcType=INTEGER},
+      </if>
+      <if test="takefield != null" >
+        TakeField = #{takefield,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleted != null" >
+        Deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="processid != null" >
+        ProcessID = #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="seqno != null" >
+        SeqNo = #{seqno,jdbcType=NVARCHAR},
+      </if>
+      <if test="paytime != null" >
+        PayTime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payuser != null" >
+        PayUser = #{payuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="printcount != null" >
+        PrintCount = #{printcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where BorrowID = #{borrowid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsd.entity.fundstatement.Borrow" >
+    update Borrow
+    set UserID = #{userid,jdbcType=INTEGER},
+      Reason = #{reason,jdbcType=NVARCHAR},
+      Amount = #{amount,jdbcType=DECIMAL},
+      PhotoPath = #{photopath,jdbcType=NVARCHAR},
+      CheckStatus = #{checkstatus,jdbcType=INTEGER},
+      PayStatus = #{paystatus,jdbcType=INTEGER},
+      TakeUserName = #{takeusername,jdbcType=NVARCHAR},
+      TakeUser = #{takeuser,jdbcType=INTEGER},
+      TakeField = #{takefield,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=NVARCHAR},
+      Deleted = #{deleted,jdbcType=BIT},
+      ProcessID = #{processid,jdbcType=INTEGER},
+      SeqNo = #{seqno,jdbcType=NVARCHAR},
+      PayTime = #{paytime,jdbcType=TIMESTAMP},
+      PayUser = #{payuser,jdbcType=NVARCHAR},
+      PrintCount = #{printcount,jdbcType=INTEGER}
+    where BorrowID = #{borrowid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  <!--<select id="selectAllProjectCostingTotalMoney" resultType="string">-->
+	  <!--SELECT SUM(cast (num1 as DECIMAL(18,2)))+sum(cast (num2 as DECIMAL(18,2)))+sum(cast (num3 as DECIMAL(18,2))) as totals FROM(-->
+			<!--SELECT sum(cast (Amount as DECIMAL(18,2))) as num1,0 num2,0 num3 FROM ExpensesReimbursement WHERE  Deleted !=1  and PayStatus =1-->
+			<!--UNION ALL -->
+			<!--SELECT 0 num1,sum(cast (Total as DECIMAL(18,2))) num2,0 num3 FROM FieldMoney WHERE   Deleted !=1  and PayStatus =1-->
+			<!--UNION ALL -->
+			<!--SELECT 0 num1, 0 num2,sum(cast(w.basePay as DECIMAL(18,2))+cast(w.performancePay as DECIMAL(18,2))+cast(w.otherWelfare as DECIMAL(18,2))) num3 FROM wageCalculation w WHERE w.flag=0-->
+		<!--) total-->
+
+  <!--</select>-->
+  <select id="selectAllProjectCostingTotalMoney" resultType="string">
+	  SELECT SUM(cast (num1 as DECIMAL(18,2)))+sum(cast (num2 as DECIMAL(18,2)))+sum(cast (num3 as DECIMAL(18,2))) as totals FROM(
+			SELECT sum(cast (e.Amount as DECIMAL(18,2))) as num1,0 num2,0 num3 FROM ExpensesReimbursement e,Field f WHERE  e.Deleted !=1 AND f.deleted!=1 and PayStatus =1  AND e.FieldID=f.FieldID
+            <if test="fieldId !=null and fieldId!='' ">
+				AND f.FieldID='5'
+            </if>
+			UNION ALL
+			SELECT 0 num1,sum(cast (fm.Total as DECIMAL(18,2))) num2,0 num3 FROM FieldMoney fm,Field f WHERE   fm.Deleted !=1 AND f.deleted!=1  and PayStatus =1  AND fm.fieldName=f.Name
+            <if test="fieldId !=null and fieldId!='' ">
+				AND f.FieldID='5'
+            </if>
+			UNION ALL
+			SELECT 0 num1, 0 num2,sum(cast(w.basePay as DECIMAL(18,2))+cast(w.performancePay as DECIMAL(18,2))+cast(w.otherWelfare as DECIMAL(18,2))) num3 FROM wageCalculation w,Field f WHERE w.flag=0 AND f.deleted!=1
+			AND w.FieldID=f.FieldID
+            <if test="fieldId !=null and fieldId!='' ">
+				AND f.FieldID='5'
+            </if>
+      ) total
+
+  </select>
+  
+  
+  <select id="selectProjectCostingDetail" resultType="com.hsd.vo.RankingDetailVo">
+		SELECT
+			name,
+			abs(SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2)))) AS money
+		FROM
+			(
+				SELECT
+					SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+					0 num2,
+					0 num3,
+					f.Name
+				FROM
+					ExpensesReimbursement e,
+					Field f
+				WHERE
+					e.Deleted != 1
+				AND e.PayStatus = 1
+				AND f.Deleted != 1
+				AND e.FieldID = f.FieldID
+				GROUP BY
+					e.FieldID,
+					f.Name
+				UNION ALL
+					SELECT
+						0 num1,
+						SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+						0 num3,
+						f.Name
+					FROM
+						wageCalculation w,
+						Field f
+					WHERE
+						w.flag =0					 
+					AND f.Deleted != 1
+					AND w.fieldId = f.FieldID
+					GROUP BY
+						w.fieldId,
+						f.Name
+					UNION ALL
+						SELECT
+							0 num1,
+							0 num2,
+							SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+							fm.FieldName Name
+						FROM
+							FieldMoney fm,
+							Field f
+						WHERE
+							fm.Deleted != 1
+						AND f.Deleted != 1	
+						AND fm.PayStatus = 1
+						AND fm.FieldName = f.name
+						GROUP BY
+							fm.FieldName
+			) total
+			GROUP BY NAME  
+			ORDER BY money desc	
+  </select>
+  
+  <select id="selectProjectMonthCostingDetails" resultType="com.hsd.vo.ProjectMonthIncomeVo">
+		
+		SELECT name,sum(cast (realityMoney as DECIMAL(18,2))) as realityMoney,sum(cast (shouldMoney as DECIMAL(18,2))) as shouldMoney,sum(cast (shouldMoney as DECIMAL(18,2)))-sum(cast (realityMoney as DECIMAL(18,2))) debtMoney,month,months yearMonth FROM(
+		
+		SELECT
+			name,
+			SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS realityMoney,
+			0 shouldMoney,
+			0 debtMoney,
+			month(months+'-01') month,months
+		FROM
+			(
+				SELECT
+					SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+					0 num2,
+					0 num3,
+					f.Name,
+					CONVERT (VARCHAR (7),e.CreateDate,121) months
+				FROM
+					ExpensesReimbursement e,
+					Field f
+				WHERE
+					e.Deleted != 1
+				AND e.PayStatus = 1
+				AND f.Deleted != 1
+				AND e.FieldID = f.FieldID
+				GROUP BY
+					e.FieldID,
+					f.Name,
+					CONVERT (VARCHAR (7),e.CreateDate,121)
+				UNION ALL
+					SELECT
+						0 num1,
+						SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+						0 num3,
+						f.Name,
+						CONVERT (VARCHAR (7),w.createDate,121) months
+					FROM
+						wageCalculation w,
+						Field f
+					WHERE
+						w.flag=0
+					AND f.Deleted != 1
+					AND w.fieldId = f.FieldID
+					GROUP BY
+						w.fieldId,
+						f.Name,
+						CONVERT (VARCHAR (7),w.createDate,121)
+					UNION ALL
+						SELECT
+							0 num1,
+							0 num2,
+							SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+							fm.FieldName Name,
+							CONVERT (VARCHAR (7),fm.CreateTime,121) months
+						FROM
+							FieldMoney fm
+						WHERE
+							fm.Deleted != 1
+						AND fm.PayStatus = 1
+						GROUP BY
+							fm.FieldName,
+							CONVERT (VARCHAR (7),fm.CreateTime,121)
+			) total
+		
+		GROUP BY
+			NAME,
+			months
+		
+		union ALL
+		
+		SELECT
+			name,
+			0 realityMoney,
+			SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) AS shouldMoney,
+			0 debtMoney,
+			month(months+'-01') month,months
+		FROM
+			(
+				 SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))+cast(r.subscribeRedLine as DECIMAL(18,2))) num1,
+					0 num2 ,f.Name,CONVERT (VARCHAR (7),r.createDate,121) AS months FROM RedLine r,Field f
+					WHERE
+					r.flag=0 AND f.Deleted!=1 
+					AND r.FieldID=f.FieldID
+					GROUP BY r.FieldID,f.Name,CONVERT (VARCHAR (7),r.createDate,121)
+
+					UNION ALL 
+
+					SELECT 0 num1,sum(cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2 ,f.Name,CONVERT (VARCHAR (7),w.createDate,121) AS months FROM wageCalculation w ,Field f 
+					WHERE 
+						w.flag=0 AND f.Deleted!=1
+					AND w.fieldId=f.FieldID
+					GROUP BY w.fieldId,f.name,CONVERT (VARCHAR (7),w.createDate,121)
+			) total2
+		
+		GROUP BY
+			NAME,
+			months
+		)alls
+		WHERE
+			YEAR (months + '-01') = YEAR (GETDATE())
+			
+		AND name LIKE '%'+#{projectName,jdbcType=VARCHAR}+'%'  
+		GROUP BY
+			NAME,
+			months,month
+		ORDER BY
+			months DESC 
+  </select>
+  
+  
+  
+  
+  <select id="selectProjectProfitDetail" resultType="com.hsd.vo.RankingDetailVo">
+		SELECT 
+			alls.name,
+			abs(sum(cast (alls.money1 as DECIMAL(18,2))-cast (alls.money2 as DECIMAL(18,2))))  money
+		FROM (
+				SELECT list.name,sum(cast(list.num1 as DECIMAL(18,2))+cast(list.num2 as DECIMAL(18,2))) money1,0 money2 FROM (
+					SELECT f.Name,sum(cast(c.RealityMC as DECIMAL(18,2))+cast(c.Subtract as DECIMAL(18,2))+cast(c.AgencyFund as DECIMAL(18,2))) num1,0 num2 
+					FROM ContractPay c, Field f 
+					WHERE 
+					f.Deleted != 1 
+					AND c.Deleted!=1 
+					AND c.FieldID = f.FieldID 
+					GROUP BY f.name 
+					
+					UNION ALL
+					
+					SELECT f.Name,0 num1, sum(cast(p.money as DECIMAL(18,2)))num2 FROM projectIncome p,Field f
+					WHERE 
+					p.flag=0 
+					AND f.Deleted != 1 
+					AND p.fieldID=f.FieldID
+					GROUP BY f.name
+				)list
+				WHERE  cast(list.num1 as DECIMAL(18,2))+cast(list.num2 as DECIMAL(18,2))>0
+				GROUP BY list.name
+				 
+				
+				UNION ALL
+				SELECT
+					name,
+					0 money1,
+					SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS money2
+				FROM
+					(
+						SELECT
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.Name
+						FROM
+							ExpensesReimbursement e INNER JOIN
+							Field f ON e.FieldID = f.FieldID
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1					 
+						GROUP BY
+							e.FieldID,
+							f.Name
+						UNION ALL
+							SELECT
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.Name
+							FROM
+								wageCalculation w INNER JOIN 
+								Field f ON w.fieldId = f.FieldID
+							WHERE
+								w.flag=0
+							AND f.Deleted != 1
+							AND w.fieldId=f.FieldID
+							GROUP BY
+								w.fieldId,
+								f.Name
+							UNION ALL
+								SELECT
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									fm.FieldName Name
+								FROM
+									FieldMoney fm
+								WHERE
+									fm.Deleted != 1
+								AND fm.PayStatus = 1
+								GROUP BY
+									fm.FieldName
+					) total2
+				GROUP BY
+					NAME
+				
+		
+		)alls
+		GROUP BY alls.Name
+  		ORDER BY money desc
+
+  </select>
+  
+  
+  <select id="selectProjectMonthProfitDetails" resultType="com.hsd.vo.ProjectMonthIncomeVo">
+
+		SELECT 
+					lists.name,
+					SUM(CAST (lists.shouldMoney1 as DECIMAL(18,2))-CAST(lists.shouldMoney2 as DECIMAL(18,2))) shouldMoney,
+					SUM(CAST (lists.realityMoney1 as DECIMAL(18,2))-CAST(lists.realityMoney2 as DECIMAL(18,2)))  realityMoney,
+					SUM(CAST (lists.debtMoney1 as DECIMAL(18,2))-CAST(lists.debtMoney2 as DECIMAL(18,2))) debtMoney,
+					lists.[month]
+		FROM (
+		
+		SELECT list.name,SUM(cast(list.shouldMoney as DECIMAL(18,2))) shouldMoney1,SUM(cast (list.realityMoney as DECIMAL(18,2))) realityMoney1,
+		SUM(cast(list.shouldMoney as DECIMAL(18,2))-cast (list.realityMoney as DECIMAL(18,2))) debtMoney1,0 shouldMoney2,0 realityMoney2,0 debtMoney2,list.[month] FROM(
+		
+		SELECT
+					f.Name name,
+					0 shouldMoney,
+					SUM(cast (c.RealityMC  as DECIMAL(18,2))) realityMoney,
+					month(c.RealityMCDate) month
+			 
+				FROM
+					ContractPay c
+				INNER JOIN Field f ON c.FieldID = f.FieldID 
+				WHERE
+					C.Deleted != 1
+				AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+				AND c.RealityMCDate IS NOT NULL
+				GROUP BY f.name ,month(c.RealityMCDate)
+		UNION ALL 
+		SELECT f.Name name,
+					0 shouldMoney,
+					sum(cast(p.money as DECIMAL(18,2))) realityMoney,
+					month(p.[date])
+		FROM projectIncome p,Field f
+		WHERE 
+			p.flag=0 AND f.Deleted!=1
+		AND p.fieldID=f.FieldID
+		AND YEAR (p.[date]) = YEAR (GETDATE())
+		GROUP BY f.Name,month(p.[date])
+		
+		UNION ALL 
+		SELECT 
+			f.Name,
+			sum(cast(r.predictIncome as DECIMAL(18,2))) shouldMoney,
+			0 realityMoney,
+			month(r.createDate)
+		FROM RedLine r,Field f
+		WHERE
+		r.flag=0
+		AND f.Deleted !=1
+		AND r.FieldID=f.FieldID
+		AND YEAR (r.createDate) = YEAR (GETDATE())
+		GROUP BY f.Name,month(r.createDate)
+		
+		)list
+			
+		GROUP BY list.name,list.[month]
+			
+		
+		-- ===============================
+		
+		UNION ALL
+		
+		
+		SELECT name,
+		0 shouldMoney1, 0 realityMoney1,0 debtMoney1,
+		sum(cast (shouldMoney as DECIMAL(18,2))) as shouldMoney2,sum(cast (realityMoney as DECIMAL(18,2))) as realityMoney2,sum(cast (shouldMoney as DECIMAL(18,2)))-sum(cast (realityMoney as DECIMAL(18,2))) debtMoney2,month FROM(
+				
+				SELECT
+					name,
+					SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS realityMoney,
+					0 shouldMoney,
+					0 debtMoney,
+					month(months+'-01') month,months
+				FROM
+					(
+						SELECT
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.Name,
+							CONVERT (VARCHAR (7),e.CreateDate,121) months
+						FROM
+							ExpensesReimbursement e,
+							Field f
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						GROUP BY
+							e.FieldID,
+							f.Name,
+							CONVERT (VARCHAR (7),e.CreateDate,121)
+						UNION ALL
+							SELECT
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.Name,
+								CONVERT (VARCHAR (7),w.createDate,121) months
+							FROM
+								wageCalculation w,
+								Field f
+							WHERE
+								w.flag=0
+							AND f.Deleted != 1
+							AND w.fieldId = f.FieldID
+							GROUP BY
+								w.fieldId,
+								f.Name,
+								CONVERT (VARCHAR (7),w.createDate,121)
+							UNION ALL
+								SELECT
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									fm.FieldName Name,
+									CONVERT (VARCHAR (7),fm.CreateTime,121) months
+								FROM
+									FieldMoney fm
+								WHERE
+									fm.Deleted != 1
+								AND fm.PayStatus = 1
+								GROUP BY
+									fm.FieldName,
+									CONVERT (VARCHAR (7),fm.CreateTime,121)
+					) total
+				
+				GROUP BY
+					NAME,
+					months
+				
+				union ALL
+				
+				SELECT
+					name,
+					0 realityMoney,
+					SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) AS shouldMoney,
+					0 debtMoney,
+					month(months+'-01') month,months
+				FROM
+					(
+						 SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))+cast(r.subscribeRedLine as DECIMAL(18,2))) num1,
+							0 num2 ,f.Name,CONVERT (VARCHAR (7),r.createDate,121) AS months FROM RedLine r,Field f
+							WHERE
+							r.flag=0 AND f.Deleted!=1 
+							AND r.FieldID=f.FieldID
+							GROUP BY r.FieldID,f.Name,CONVERT (VARCHAR (7),r.createDate,121)
+		
+							UNION ALL 
+		
+							SELECT 0 num1,sum(cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2 ,f.Name,CONVERT (VARCHAR (7),w.createDate,121) AS months FROM wageCalculation w ,Field f 
+							WHERE 
+								w.flag=0 AND f.Deleted!=1
+							AND w.fieldId=f.FieldID
+							GROUP BY w.fieldId,f.name,CONVERT (VARCHAR (7),w.createDate,121)
+					) total2
+				
+				GROUP BY
+					NAME,
+					months
+		)alls
+		WHERE
+		YEAR (months + '-01') = YEAR (GETDATE())			  
+		GROUP BY NAME,months,month
+		)lists	
+		WHERE  lists.name LIKE '%'+#{projectName,jdbcType=VARCHAR}+'%'
+		GROUP BY lists.name,lists.[month]
+		
+				
+ 
+
+
+  </select>
+ 
+ 
+	<select id="selectTotalIncomeByMonth" resultType="string">
+		SELECT sum(cast (totalIncome.cmoney as DECIMAL(18,2))+cast (totalIncome.pmoney as DECIMAL(18,2))) totalmoney from (
+			SELECT  SUM(cast (c.RealityMC as DECIMAL(18,2))+cast (c.Subtract as DECIMAL(18,2))+cast (c.AgencyFund as DECIMAL(18,2))) cmoney, 0 pmoney,CONVERT(varchar(100), c.RealityMCDate, 23) dates FROM ContractPay c  
+			WHERE c.Deleted != 1  AND c.RealityMCDate IS NOT NULL  GROUP BY c.RealityMCDate
+			
+			UNION ALL 
+			
+			SELECT 0 cmoney,sum(cast (p.money as DECIMAL(18,2))) pmoney ,p.date dates from projectIncome p WHERE p.flag = 0 AND YEAR (p.date) = YEAR (GETDATE()) GROUP BY p.[date]
+		) totalIncome
+		WHERE 
+		totalIncome.cmoney+totalIncome.pmoney is not null 
+		AND
+		YEAR (totalIncome.dates) = YEAR (GETDATE())
+		AND
+		MONTH(totalIncome.dates) = #{month,jdbcType=VARCHAR}
+		GROUP BY MONTH(totalIncome.dates) 
+		ORDER BY MONTH(totalIncome.dates) desc	
+		
+	</select>
+	
+	<select id="selectTotalIncomeByYear" resultType="string">
+		SELECT sum(cast (totalIncome.cmoney as DECIMAL(18,2))+cast (totalIncome.pmoney as DECIMAL(18,2))) totalmoney from (
+			SELECT  SUM(cast (c.RealityMC as DECIMAL(18,2))+cast (c.Subtract as DECIMAL(18,2))+cast (c.AgencyFund as DECIMAL(18,2))) cmoney, 0 pmoney,CONVERT(varchar(100), c.RealityMCDate, 23) dates FROM ContractPay c  
+			WHERE c.Deleted != 1 GROUP BY c.RealityMCDate
+			
+			UNION ALL 
+			
+			SELECT 0 cmoney,sum(cast (p.money as DECIMAL(18,2))) pmoney ,p.date dates from projectIncome p WHERE p.flag = 0  GROUP BY p.[date]
+		) totalIncome
+		WHERE 
+		totalIncome.cmoney+totalIncome.pmoney is not null 
+		AND YEAR(totalIncome.dates) = #{year,jdbcType=VARCHAR}
+		GROUP BY YEAR(totalIncome.dates) 
+		ORDER BY YEAR(totalIncome.dates) desc		
+		
+	</select>	
+	
+	
+	<select id="selectTotalInjectByMonth" resultType="string">
+		SELECT
+			SUM(cast (list.totalInject as DECIMAL(18,2))) totalInject
+		FROM (
+		
+			SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))) totalInject,month(r.createDate) months FROM RedLine r WHERE  r.flag=0 
+			AND YEAR(r.createDate) = YEAR (GETDATE())
+					 
+			GROUP BY month(r.createDate) 
+			
+			UNION ALL 
+			
+			SELECT sum(cast(w.basePay as DECIMAL(18,2))+cast(w.performancePay as DECIMAL(18,2))+cast(w.otherWelfare as DECIMAL(18,2))) totalInject,month(w.createDate) months FROM wageCalculation w
+			WHERE w.flag=0 
+			AND YEAR(w.createDate) = YEAR (GETDATE())
+			
+			GROUP BY month(w.createDate)
+		)list
+		WHERE list.months=#{month,jdbcType=VARCHAR}
+		GROUP BY list.months
+	</select>
+	
+	<select id="selectTotalInjectByYear" resultType="string">
+		SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.BorrowRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))) totalInject FROM RedLine r WHERE  r.flag=0 
+		AND YEAR(r.createDate) = #{year,jdbcType=VARCHAR}
+		GROUP BY YEAR(r.createDate) 
+		ORDER BY YEAR(r.createDate) DESC
+	</select>	
+  
+  
+  
+  	<select id="selectTotalExpenditureByMonth" resultType="string">
+		SELECT
+			--MONTH (total.dates),
+			SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS money
+		FROM
+			(
+				SELECT
+					SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+					0 num2,
+					0 num3,
+					f.Name,
+					e.PayTime dates
+				FROM
+					ExpensesReimbursement e,
+					Field f
+				WHERE
+					e.Deleted != 1
+				AND e.PayStatus = 1
+				AND f.Deleted != 1
+				AND e.FieldID = f.FieldID
+				AND YEAR (e.PayTime) = YEAR (GETDATE())
+				GROUP BY
+					e.FieldID,
+					f.Name,
+					e.PayTime
+				UNION ALL
+					SELECT
+						0 num1,
+						SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+						0 num3,
+						f.Name,
+						w.createDate dates
+					FROM
+						wageCalculation w,
+						Field f
+					WHERE
+						w.flag=0
+					AND f.Deleted != 1
+					AND w.fieldId = f.FieldID
+					AND YEAR (w.createDate) = YEAR (GETDATE())
+					GROUP BY
+						w.fieldId,
+						f.Name,
+						w.createDate
+					UNION ALL
+						SELECT
+							0 num1,
+							0 num2,
+							SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+							fm.FieldName Name,
+							fm.PayTime dates
+						FROM
+							FieldMoney fm
+						WHERE
+							fm.Deleted != 1
+						AND fm.PayStatus = 1
+						AND YEAR (fm.PayTime) = YEAR (GETDATE())
+						GROUP BY
+							fm.FieldName,
+							fm.PayTime
+			) total
+		WHERE 
+			YEAR (total.dates) = YEAR (GETDATE())
+			AND month(total.dates)= #{month,jdbcType=VARCHAR}
+		GROUP BY
+			MONTH (total.dates)
+		ORDER BY
+			MONTH (total.dates) DESC  	
+  	
+  	</select>
+  	
+ 	<select id="selectTotalExpenditureByYear" resultType="string">
+		SELECT
+			--MONTH (total.dates),
+			SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS money
+		FROM
+			(
+				SELECT
+					SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+					0 num2,
+					0 num3,
+					f.Name,
+					e.PayTime dates
+				FROM
+					ExpensesReimbursement e,
+					Field f
+				WHERE
+					e.Deleted != 1
+				AND e.PayStatus = 1
+				AND f.Deleted != 1
+				AND e.FieldID = f.FieldID
+				GROUP BY
+					e.FieldID,
+					f.Name,
+					e.PayTime
+				UNION ALL
+					SELECT
+						0 num1,
+						SUM (cast (b.Amount as DECIMAL(18,2))) num2,
+						0 num3,
+						f.Name,
+						b.PayTime dates
+					FROM
+						Borrow b,
+						Field f
+					WHERE
+						b.Deleted != 1
+					AND b.PayStatus = 1
+					AND f.Deleted != 1
+					AND b.TakeField = f.FieldID
+					GROUP BY
+						b.TakeField,
+						f.Name,
+						b.PayTime
+					UNION ALL
+						SELECT
+							0 num1,
+							0 num2,
+							SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+							fm.FieldName Name,
+							fm.PayTime dates
+						FROM
+							FieldMoney fm
+						WHERE
+							fm.Deleted != 1
+						AND fm.PayStatus = 1
+						GROUP BY
+							fm.FieldName,
+							fm.PayTime
+			) total
+		WHERE 
+			 YEAR(total.dates)= #{year,jdbcType=VARCHAR}
+		GROUP BY
+			YEAR (total.dates)
+		ORDER BY
+			YEAR (total.dates) DESC  	
+  	
+  	</select>  	
+  	
+  	
+  	
+  	<select id="selectProfitTotalByMonthAndProject" resultType="string">
+		SELECT sum(cast (totalIncome.cmoney as DECIMAL(18,2))+cast (totalIncome.pmoney as DECIMAL(18,2))) totalmoney from (
+			SELECT  SUM(cast (c.RealityMC as DECIMAL(18,2))+cast (c.Subtract as DECIMAL(18,2))+cast (c.AgencyFund as DECIMAL(18,2))) cmoney, 0 pmoney,CONVERT(varchar(100), c.RealityMCDate, 23) dates,f.Name FROM ContractPay c ,Field f 
+			WHERE c.Deleted != 1  AND f.Deleted!=1 AND c.FieldID=f.FieldID GROUP BY c.RealityMCDate,f.Name
+			
+			UNION ALL 
+			
+			SELECT 0 cmoney,sum(cast (p.money as DECIMAL(18,2))) pmoney ,p.date dates,f.Name from projectIncome p,Field f WHERE p.flag = 0 AND f.Deleted!=1 AND p.fieldID=f.FieldID AND YEAR (p.date) = YEAR (GETDATE()) GROUP BY p.[date],f.Name
+		) totalIncome
+		WHERE 
+		totalIncome.cmoney+totalIncome.pmoney is not null 
+		AND
+		YEAR (totalIncome.dates) = YEAR (GETDATE()) 
+		AND MONTH(totalIncome.dates) = #{month,jdbcType=VARCHAR}
+		<if test="fieldName !=null and fieldName!='' ">
+			AND totalIncome.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+		</if>
+		GROUP BY MONTH(totalIncome.dates)
+		<if test="fieldName !=null and fieldName!='' ">
+			,totalIncome.Name 
+		</if>		
+	 
+		ORDER BY MONTH(totalIncome.dates) desc	  	
+  	
+  	</select>
+  	
+  	<select id="selectProfitTotalByYearAndProject" resultType="string">
+		SELECT sum(cast (totalIncome.cmoney as DECIMAL(18,2))+cast (totalIncome.pmoney as DECIMAL(18,2))) totalmoney from (
+			SELECT  SUM(cast (c.RealityMC as DECIMAL(18,2))+cast (c.Subtract as DECIMAL(18,2))+cast (c.AgencyFund as DECIMAL(18,2))) cmoney, 0 pmoney,CONVERT(varchar(100), c.RealityMCDate, 23) dates,f.Name FROM ContractPay c ,Field f 
+			WHERE c.Deleted != 1  AND f.Deleted!=1 AND c.FieldID=f.FieldID GROUP BY c.RealityMCDate,f.Name
+			
+			UNION ALL 
+			
+			SELECT 0 cmoney,sum(cast (p.money as DECIMAL(18,2))) pmoney ,p.date dates,f.Name from projectIncome p,Field f WHERE p.flag = 0 AND f.Deleted!=1 AND p.fieldID=f.FieldID  GROUP BY p.[date],f.Name
+		) totalIncome
+		WHERE 
+		totalIncome.cmoney+totalIncome.pmoney is not null 
+		AND 
+		AND YEAR(totalIncome.dates) = #{year,jdbcType=VARCHAR}
+		<if test="fieldName !=null and fieldName!='' ">
+			AND totalIncome.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+		</if>
+		GROUP BY YEAR(totalIncome.dates)
+		<if test="fieldName !=null and fieldName!='' ">
+			,totalIncome.Name 
+		</if>
+		ORDER BY YEAR(totalIncome.dates) desc	  	
+  	
+  	</select>
+  	
+  	
+  	<select id="selectInjectMoneyByMonthAndProject" resultType="string">
+		SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.BorrowRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))) totalInject  FROM RedLine r,Field f WHERE  r.flag=0 
+		AND f.Deleted !=1	
+		AND r.FieldID=f.FieldID
+		AND YEAR(r.createDate) = YEAR (GETDATE())
+		AND month(r.createDate) = #{month,jdbcType=VARCHAR}
+		<if test="fieldName !=null and fieldName!='' ">
+			AND f.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+		</if>
+		GROUP BY month(r.createDate)
+		<if test="fieldName !=null and fieldName!='' ">
+			,f.Name 
+		</if>
+		ORDER BY month(r.createDate) DESC  	
+  	
+  	</select>
+  	<select id="selectInjectMoneyByYearAndProject" resultType="string">
+		SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.BorrowRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))) totalInject  FROM RedLine r,Field f WHERE  r.flag=0 
+		AND f.Deleted !=1	
+		AND r.FieldID=f.FieldID
+		AND YEAR(r.createDate) = #{year,jdbcType=VARCHAR}
+		<if test="fieldName !=null and fieldName!='' ">
+		AND f.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+		</if>
+			GROUP BY YEAR(r.createDate)
+		<if test="fieldName !=null and fieldName!='' ">
+			,f.Name 
+		</if>
+		ORDER BY YEAR(r.createDate) DESC  	
+  	
+  	</select>
+  	
+  	
+  	<select id="selectExpenditureMoneyByMonthAndProject" resultType="string">
+		SELECT
+			SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS money
+		FROM
+			(
+				SELECT
+					SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+					0 num2,
+					0 num3,
+					f.Name,
+					e.PayTime dates
+				FROM
+					ExpensesReimbursement e,
+					Field f
+				WHERE
+					e.Deleted != 1
+				AND e.PayStatus = 1
+				AND f.Deleted != 1
+				AND e.FieldID = f.FieldID
+				AND YEAR (e.PayTime) = YEAR (GETDATE())
+				GROUP BY
+					e.FieldID,
+					f.Name,
+					e.PayTime
+				UNION ALL
+					SELECT
+						0 num1,
+						SUM (cast (b.Amount as DECIMAL(18,2))) num2,
+						0 num3,
+						f.Name,
+						b.PayTime dates
+					FROM
+						Borrow b,
+						Field f
+					WHERE
+						b.Deleted != 1
+					AND b.PayStatus = 1
+					AND f.Deleted != 1
+					AND b.TakeField = f.FieldID
+					AND YEAR (b.PayTime) = YEAR (GETDATE())
+					GROUP BY
+						b.TakeField,
+						f.Name,
+						b.PayTime
+					UNION ALL
+						SELECT
+							0 num1,
+							0 num2,
+							SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+							fm.FieldName Name,
+							fm.PayTime dates
+						FROM
+							FieldMoney fm
+						WHERE
+							fm.Deleted != 1
+						AND fm.PayStatus = 1
+						AND YEAR (fm.PayTime) = YEAR (GETDATE())
+						GROUP BY
+							fm.FieldName,
+							fm.PayTime
+			) total
+		WHERE 
+			YEAR (total.dates) = YEAR (GETDATE())
+			AND month(total.dates)= #{month,jdbcType=VARCHAR}
+			<if test="fieldName !=null and fieldName!='' ">
+				AND total.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+			</if>
+		GROUP BY
+			MONTH (total.dates)
+			<if test="fieldName !=null and fieldName!='' ">
+				,total.Name
+			</if>
+		ORDER BY
+			MONTH (total.dates) DESC    	
+  	</select>
+  	<select id="selectExpenditureMoneyByYearAndProject" resultType="string">
+		SELECT
+			SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS money
+		FROM
+			(
+				SELECT
+					SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+					0 num2,
+					0 num3,
+					f.Name,
+					e.PayTime dates
+				FROM
+					ExpensesReimbursement e,
+					Field f
+				WHERE
+					e.Deleted != 1
+				AND e.PayStatus = 1
+				AND f.Deleted != 1
+				AND e.FieldID = f.FieldID
+				
+				GROUP BY
+					e.FieldID,
+					f.Name,
+					e.PayTime
+				UNION ALL
+					SELECT
+						0 num1,
+						SUM (cast (b.Amount as DECIMAL(18,2))) num2,
+						0 num3,
+						f.Name,
+						b.PayTime dates
+					FROM
+						Borrow b,
+						Field f
+					WHERE
+						b.Deleted != 1
+					AND b.PayStatus = 1
+					AND f.Deleted != 1
+					AND b.TakeField = f.FieldID
+				
+					GROUP BY
+						b.TakeField,
+						f.Name,
+						b.PayTime
+					UNION ALL
+						SELECT
+							0 num1,
+							0 num2,
+							SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+							fm.FieldName Name,
+							fm.PayTime dates
+						FROM
+							FieldMoney fm
+						WHERE
+							fm.Deleted != 1
+						AND fm.PayStatus = 1
+						
+						GROUP BY
+							fm.FieldName,
+							fm.PayTime
+			) total
+		WHERE 
+			
+			 YEAR(total.dates)= #{year,jdbcType=VARCHAR}
+			<if test="fieldName !=null and fieldName!='' ">
+				AND total.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+			</if>
+		GROUP BY
+			YEAR (total.dates)
+			<if test="fieldName !=null and fieldName!='' ">
+				,total.Name
+			</if>
+		ORDER BY
+			YEAR (total.dates) DESC    	
+  	</select>
+  	
+  	
+  	<select id="selectIdAndFieldNameByFieldName" resultType="hashMap">
+  	<if test="fieldName !=null and fieldName!='' ">
+		SELECT 
+			FieldID,
+			Name 
+		from  
+			Field
+		WHERE 
+			Deleted !=1
+		AND Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'	
+	</if>
+	<if test="fieldName ==null or fieldName=='' ">
+  	SELECT 
+  		top 1
+			'' FieldID,
+			'' Name 
+		from  
+			Field
+		WHERE 
+			Deleted !=1
+  	</if>
+  	</select>
+  	
+  	
+  	
+  	
+  	<select id="selectListMonthStatements" resultType="com.hsd.entity.fundstatement.FieldStatement">
+SELECT sum(cast (profitTotal as DECIMAL(18,2))) profitTotal,sum(cast (injectMoney as DECIMAL(18,2))) injectMoney,sum(cast (expenditureMoney as DECIMAL(18,2))) expenditureMoney,list.fieldId,list.fieldName FROM (		
+		SELECT sum(cast (totalIncome.cmoney as DECIMAL(18,2))+cast (totalIncome.pmoney as DECIMAL(18,2))) profitTotal,0 injectMoney,0 expenditureMoney,totalIncome.Name fieldName,MONTH(totalIncome.dates) dates,totalIncome.FieldID fieldId from (
+					SELECT  SUM(cast (c.RealityMC as DECIMAL(18,2))+cast (c.Subtract as DECIMAL(18,2))+cast (c.AgencyFund as DECIMAL(18,2))) cmoney, 0 pmoney,CONVERT(varchar(100), c.RealityMCDate, 23) dates,f.Name,f.FieldID FROM ContractPay c ,Field f 
+					WHERE c.Deleted != 1  AND f.Deleted!=1 AND c.FieldID=f.FieldID GROUP BY c.RealityMCDate,f.Name,f.FieldID
+					
+					UNION ALL 
+					
+					SELECT 0 cmoney,sum(cast (p.money as DECIMAL(18,2))) pmoney ,p.date dates,f.Name,f.FieldID from projectIncome p,Field f WHERE p.flag = 0 AND f.Deleted!=1 AND p.fieldID=f.FieldID AND YEAR (p.date) = YEAR (GETDATE()) GROUP BY p.[date],f.Name,f.FieldID
+				) totalIncome
+				WHERE 
+				totalIncome.cmoney+totalIncome.pmoney is not null 
+				AND
+				YEAR (totalIncome.dates) = YEAR (GETDATE()) 
+				AND MONTH(totalIncome.dates) = #{month,jdbcType=VARCHAR}
+				<if test="fieldName !=null and fieldName!='' ">
+					AND totalIncome.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+				</if>
+				GROUP BY MONTH(totalIncome.dates),totalIncome.Name,totalIncome.FieldID	
+			 
+				 
+		
+		UNION ALL 
+		
+				SELECT 0 profitTotal,sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))) injectMoney,0 expenditureMoney,f.Name fieldName,month(r.createDate) dates,f.FieldID fieldId FROM RedLine r,Field f WHERE  r.flag=0 
+				AND f.Deleted !=1	
+				AND r.FieldID=f.FieldID
+				AND YEAR(r.createDate) = YEAR (GETDATE())
+				AND month(r.createDate) = #{month,jdbcType=VARCHAR}
+				<if test="fieldName !=null and fieldName!='' ">
+					AND f.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+				</if>
+				GROUP BY month(r.createDate),f.Name,f.FieldID 
+			
+				
+		
+		UNION ALL
+		
+				SELECT
+					0 profitTotal,0 injectMoney,
+					SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS expenditureMoney,total.Name fieldName,MONTH (total.dates) dates,total.FieldID fieldId
+				FROM
+					(
+						SELECT
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.Name,
+							e.PayTime dates,
+							f.FieldID
+						FROM
+							ExpensesReimbursement e,
+							Field f
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						AND YEAR (e.PayTime) = YEAR (GETDATE())
+						GROUP BY
+							e.FieldID,
+							f.Name,
+							e.PayTime,
+							f.FieldID
+						UNION ALL
+							SELECT
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.Name,
+								w.createDate dates,
+								f.FieldID
+							FROM
+								 wageCalculation w,
+								Field f
+							WHERE
+								w.flag=0 
+							AND f.Deleted != 1
+							AND w.fieldId = f.FieldID
+							AND YEAR (w.createDate) = YEAR (GETDATE())
+							GROUP BY
+								w.fieldId,
+								f.Name,
+								w.createDate,
+								f.FieldID
+							UNION ALL
+								SELECT
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									fm.FieldName Name,
+									fm.PayTime dates,
+									f.FieldID
+								FROM
+									FieldMoney fm,
+									Field f
+								WHERE
+									fm.Deleted != 1
+								AND fm.PayStatus = 1
+								AND	fm.FieldName=f.Name
+								AND YEAR (fm.PayTime) = YEAR (GETDATE())
+								GROUP BY
+									fm.FieldName,
+									fm.PayTime,
+									f.FieldID
+					) total
+				WHERE 
+					YEAR (total.dates) = YEAR (GETDATE())
+					AND month(total.dates)= #{month,jdbcType=VARCHAR}
+					<if test="fieldName !=null and fieldName!='' ">
+						AND total.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+					</if>
+				GROUP BY
+					MONTH (total.dates),total.Name,total.FieldID
+					
+				   	
+		)list 
+		GROUP BY list.fieldId,list.fieldName	
+		ORDER BY list.fieldId	
+
+			 	
+  	
+  	</select>
+  	<select id="selectListYearStatements" resultType="com.hsd.entity.fundstatement.FieldStatement">
+		SELECT sum(cast (profitTotal as DECIMAL(18,2))) profitTotal,sum(cast (injectMoney as DECIMAL(18,2))) injectMoney,sum(cast (expenditureMoney as DECIMAL(18,2))) expenditureMoney,list.fieldId,list.fieldName FROM (	
+			SELECT sum(cast (totalIncome.cmoney as DECIMAL(18,2))+cast (totalIncome.pmoney as DECIMAL(18,2))) profitTotal,0 injectMoney,0 expenditureMoney,totalIncome.Name fieldName,YEAR(totalIncome.dates) dates,totalIncome.FieldID fieldId from (
+						SELECT  SUM(cast (c.RealityMC as DECIMAL(18,2))+cast (c.Subtract as DECIMAL(18,2))+cast (c.AgencyFund as DECIMAL(18,2))) cmoney, 0 pmoney,CONVERT(varchar(100), c.RealityMCDate, 23) dates,f.Name,f.FieldID FROM ContractPay c ,Field f 
+						WHERE c.Deleted != 1  AND f.Deleted!=1 AND c.FieldID=f.FieldID GROUP BY c.RealityMCDate,f.Name,f.FieldID
+						
+						UNION ALL 
+						
+						SELECT 0 cmoney,sum(cast (p.money as DECIMAL(18,2))) pmoney ,p.date dates,f.Name,f.FieldID from projectIncome p,Field f WHERE p.flag = 0 AND f.Deleted!=1 AND p.fieldID=f.FieldID  GROUP BY p.[date],f.Name,f.FieldID
+					) totalIncome
+					WHERE 
+					totalIncome.cmoney+totalIncome.pmoney is not null 
+					AND YEAR(totalIncome.dates) = #{year,jdbcType=VARCHAR}
+					<if test="fieldName !=null and fieldName!='' ">
+						AND totalIncome.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+					</if>
+					GROUP BY YEAR(totalIncome.dates),totalIncome.Name,totalIncome.FieldID	
+				 
+					 
+			
+			UNION ALL 
+			
+					SELECT 0 profitTotal,sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine as DECIMAL(18,2))+cast (r.ApplyRedLine as DECIMAL(18,2))) injectMoney,0 expenditureMoney,f.Name fieldName,YEAR(r.createDate) dates,f.FieldID fieldId FROM RedLine r,Field f WHERE  r.flag=0 
+					AND f.Deleted !=1	
+					AND r.FieldID=f.FieldID
+					AND YEAR(r.createDate) = #{year,jdbcType=VARCHAR}
+					<if test="fieldName !=null and fieldName!='' ">
+						AND f.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+					</if>
+					GROUP BY YEAR(r.createDate),f.Name,f.FieldID 
+				
+					
+			
+			UNION ALL
+			
+					SELECT
+						0 profitTotal,0 injectMoney,
+						SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS expenditureMoney,total.Name fieldName,YEAR (total.dates) dates,total.FieldID fieldId
+					FROM
+						(
+							SELECT
+								SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+								0 num2,
+								0 num3,
+								f.Name,
+								e.PayTime dates,
+								f.FieldID
+							FROM
+								ExpensesReimbursement e,
+								Field f
+							WHERE
+								e.Deleted != 1
+							AND e.PayStatus = 1
+							AND f.Deleted != 1
+							AND e.FieldID = f.FieldID
+							GROUP BY
+								e.FieldID,
+								f.Name,
+								e.PayTime,
+								f.FieldID
+							UNION ALL
+								SELECT
+									0 num1,
+									SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+									0 num3,
+									f.Name,
+									w.createDate dates,
+									f.FieldID
+								FROM
+									wageCalculation w,
+									Field f
+								WHERE
+									w.flag=0 
+								AND f.Deleted != 1
+								AND w.fieldId = f.FieldID
+								GROUP BY
+									w.fieldId,
+									f.Name,
+									w.createDate,
+									f.FieldID
+								UNION ALL
+									SELECT
+										0 num1,
+										0 num2,
+										SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+										fm.FieldName Name,
+										fm.PayTime dates,
+										f.FieldID
+									FROM
+										FieldMoney fm,
+										Field f
+									WHERE
+										fm.Deleted != 1
+									AND fm.PayStatus = 1
+									AND	fm.FieldName=f.Name
+									GROUP BY
+										fm.FieldName,
+										fm.PayTime,
+										f.FieldID
+						) total
+					WHERE 
+						 YEAR(total.dates)= #{year,jdbcType=VARCHAR}
+						<if test="fieldName !=null and fieldName!='' ">
+							AND total.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+						</if>
+					GROUP BY
+						YEAR (total.dates),total.Name,total.FieldID
+						
+					   	
+			)list 	
+			GROUP BY list.fieldId,list.fieldName
+			ORDER BY list.fieldId
+			  	
+  	</select>
+  	
+  	<select id="selectIncomeStatisticsByMonthAndFieldId" resultType="com.hsd.vo.StatisticsPredictAndReality">		
+
+		SELECT sum(cast (list.predict as DECIMAL(18,2))) predict,sum(cast (list.reality as DECIMAL(18,2))) reality,list.m,list.FieldID,'收入统计' statistic FROM (
+			SELECT
+				0 predict,
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,month(c.RealityMCDate) m,f.FieldID
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1
+			AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY month(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT 0 predict,sum(cast (p.money as DECIMAL(18,2))) reality,month(p.[date]) m,f.FieldID FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+			AND YEAR (p.[date]) = YEAR (GETDATE())
+			
+			GROUP BY month(p.[date]),f.FieldID
+			
+			UNION ALL
+			SELECT sum(cast(r.predictIncome as DECIMAL(18,2))) predict,0 reality,month(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+			WHERE r.flag=0 and f.Deleted!=1 AND r.FieldID=f.FieldID AND YEAR (r.createDate) = YEAR (GETDATE())
+			GROUP BY month(r.createDate),f.FieldID
+			)list
+		WHERE 
+			list.m =#{month,jdbcType=VARCHAR}
+		and list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID		
+  	
+  	</select>
+  	
+  	
+  	<select id="selectInjectStatisticsByMonthAndFieldId" resultType="com.hsd.vo.StatisticsPredictAndReality">	
+		SELECT sum(cast (lists.predict as DECIMAL(18,2))) predict,sum(cast (lists.reality as DECIMAL(18,2))) reality,lists.m,lists.FieldID,'投入统计' statistic FROM (
+			SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine+r.ApplyRedLine as DECIMAL(18,2))) predict,0 reality,month(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+			WHERE  r.flag=0 AND f.Deleted!=1
+			AND r.FieldID=f.FieldID
+			AND YEAR(r.createDate) = YEAR (GETDATE())
+			GROUP BY month(r.createDate),f.FieldID
+			
+			UNION ALL 
+		
+			SELECT
+					0 predict,SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS reality,MONTH (total.dates) m,total.FieldID
+			FROM
+					(
+						SELECT
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.FieldID,
+							e.PayTime dates
+						FROM
+							ExpensesReimbursement e,
+							Field f
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						AND YEAR (e.PayTime) = YEAR (GETDATE())
+						GROUP BY
+							f.FieldID,
+							e.PayTime
+						UNION ALL
+							SELECT
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.FieldID,
+								w.createDate dates
+							FROM
+								wageCalculation w,
+								Field f
+							WHERE
+								w.flag=0 
+							AND f.Deleted != 1
+							AND w.fieldId = f.FieldID
+							AND YEAR (w.createDate) = YEAR (GETDATE())
+							GROUP BY
+								f.FieldID,
+								w.createDate
+							UNION ALL
+								SELECT
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									f.FieldID FieldID,
+									fm.PayTime dates
+								FROM
+									FieldMoney fm,
+									Field f
+								WHERE
+									fm.Deleted != 1
+								AND f.Deleted !=1
+								AND fm.PayStatus = 1
+								AND fm.FieldName=f.Name
+								AND YEAR (fm.PayTime) = YEAR (GETDATE())
+								GROUP BY
+									f.FieldID,
+									fm.PayTime
+					) total
+				WHERE 
+					YEAR (total.dates) = YEAR (GETDATE())
+				GROUP BY
+					MONTH (total.dates),total.FieldID
+		)lists
+		
+		WHERE lists.m=#{month,jdbcType=VARCHAR}
+		AND	lists.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY lists.m,lists.FieldID  	
+  	
+  	</select>
+  	
+  	<select id="selectProfitStatisticsByMonthAndFieldId" resultType="com.hsd.vo.StatisticsPredictAndReality">
+	SELECT sum(cast (totals.predict1-totals.predict2 as DECIMAL(18,2))) as predict,sum(cast (totals.reality1-totals.reality2 as DECIMAL(18,2))) as reality,totals.m,totals.FieldID,'盈利统计' statistic FROM(
+		SELECT 					sum(cast (list.predict as DECIMAL(18,2))) predict1,sum(cast (list.reality as DECIMAL(18,2))) reality1,0 predict2,0 reality2,list.m,list.FieldID FROM (
+			SELECT
+				0 predict,
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,month(c.RealityMCDate) m,f.FieldID
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1
+			AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY month(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT 0 predict,sum(cast (p.money as DECIMAL(18,2))) reality,month(p.[date]) m,f.FieldID FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+			AND YEAR (p.[date]) = YEAR (GETDATE())
+			
+			GROUP BY month(p.[date]),f.FieldID
+			
+			UNION ALL
+			SELECT sum(cast(r.predictIncome as DECIMAL(18,2))) predict,0 reality,month(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+			WHERE r.flag=0 and f.Deleted!=1 AND r.FieldID=f.FieldID AND YEAR (r.createDate) = YEAR (GETDATE())
+			GROUP BY month(r.createDate),f.FieldID
+			)list
+			GROUP BY list.m,list.FieldID	
+			
+			
+			UNION ALL
+			
+			SELECT 0 predict1, 0 reality1,sum(cast (lists.predict as DECIMAL(18,2))) predict2,sum(cast (lists.reality as DECIMAL(18,2))) reality2,lists.m,lists.FieldID FROM (
+				SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine+r.ApplyRedLine as DECIMAL(18,2))) predict,0 reality,month(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+				WHERE  r.flag=0 AND f.Deleted!=1
+				AND r.FieldID=f.FieldID
+				AND YEAR(r.createDate) = YEAR (GETDATE())
+				GROUP BY month(r.createDate),f.FieldID
+				
+			UNION ALL 
+			
+				SELECT
+						0 predict,SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS reality,MONTH (total.dates) m,total.FieldID
+				FROM
+						(
+							SELECT
+								SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+								0 num2,
+								0 num3,
+								f.FieldID,
+								e.PayTime dates
+							FROM
+								ExpensesReimbursement e,
+								Field f
+							WHERE
+								e.Deleted != 1
+							AND e.PayStatus = 1
+							AND f.Deleted != 1
+							AND e.FieldID = f.FieldID
+							AND YEAR (e.PayTime) = YEAR (GETDATE())
+							GROUP BY
+								f.FieldID,
+								e.PayTime
+							UNION ALL
+								SELECT
+									0 num1,
+									SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+									0 num3,
+									f.FieldID,
+									w.createDate dates
+								FROM
+									wageCalculation w,
+									Field f
+								WHERE
+									w.flag=0 
+								AND f.Deleted != 1
+								AND w.fieldId = f.FieldID
+								AND YEAR (w.createDate) = YEAR (GETDATE())
+								GROUP BY
+									f.FieldID,
+									w.createDate
+								UNION ALL
+									SELECT
+										0 num1,
+										0 num2,
+										SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+										f.FieldID FieldID,
+										fm.PayTime dates
+									FROM
+										FieldMoney fm,
+										Field f
+									WHERE
+										fm.Deleted != 1
+									AND f.Deleted !=1
+									AND fm.PayStatus = 1
+									AND fm.FieldName=f.Name
+									AND YEAR (fm.PayTime) = YEAR (GETDATE())
+									GROUP BY
+										f.FieldID,
+										fm.PayTime
+						) total
+					WHERE 
+						YEAR (total.dates) = YEAR (GETDATE())
+					GROUP BY
+						MONTH (total.dates),total.FieldID
+			)lists
+			GROUP BY lists.m,lists.FieldID
+			)totals
+			WHERE totals.m=#{month,jdbcType=VARCHAR}
+			AND	totals.FieldID=#{fieldId,jdbcType=VARCHAR}
+			GROUP BY totals.m,totals.FieldID
+  	
+  	
+  	
+  	</select>
+  	
+  	
+
+
+  	<select id="selectIncomeStatisticsByYearAndFieldId" resultType="com.hsd.vo.StatisticsPredictAndReality">		
+		SELECT sum(cast (list.predict as DECIMAL(18,2))) predict,sum(cast (list.reality as DECIMAL(18,2))) reality,list.m,list.FieldID,'收入统计' statistic FROM (
+			SELECT
+				0 predict,
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,year(c.RealityMCDate) m,f.FieldID
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1
+			 
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY year(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT 0 predict,sum(cast (p.money as DECIMAL(18,2))) reality,year(p.[date]) m,f.FieldID  FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+		 
+			
+			GROUP BY year(p.[date]),f.FieldID
+			
+			UNION ALL
+			SELECT sum(cast(r.predictIncome as DECIMAL(18,2))) predict,0 reality,year(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+			WHERE r.flag=0 and f.Deleted!=1 AND r.FieldID=f.FieldID 
+			GROUP BY year(r.createDate),f.FieldID
+			)list
+		WHERE 
+			list.m =#{year,jdbcType=VARCHAR}
+		and list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID		
+  	
+  	</select>
+  	
+  	
+  	<select id="selectInjectStatisticsByYearAndFieldId" resultType="com.hsd.vo.StatisticsPredictAndReality">	
+		SELECT sum(cast (lists.predict as DECIMAL(18,2))) predict,sum(cast (lists.reality as DECIMAL(18,2))) reality,lists.m,lists.FieldID,'投入统计' statistic FROM (
+			SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine+r.ApplyRedLine as DECIMAL(18,2))) predict,0 reality,year(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+			WHERE  r.flag=0 AND f.Deleted!=1
+			AND r.FieldID=f.FieldID
+			 
+			GROUP BY year(r.createDate),f.FieldID
+			
+			UNION ALL 
+		
+			SELECT
+					0 predict,SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS reality,year (total.dates) m,total.FieldID
+			FROM
+					(
+						SELECT
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.FieldID,
+							e.PayTime dates
+						FROM
+							ExpensesReimbursement e,
+							Field f
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						 
+						GROUP BY
+							f.FieldID,
+							e.PayTime
+						UNION ALL
+							SELECT
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.FieldID,
+								w.createDate dates
+							FROM
+								wageCalculation w,
+								Field f
+							WHERE
+								w.flag=0 
+							AND f.Deleted != 1
+							AND w.fieldId = f.FieldID
+							 
+							GROUP BY
+								f.FieldID,
+								w.createDate
+							UNION ALL
+								SELECT
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									f.FieldID FieldID,
+									fm.PayTime dates
+								FROM
+									FieldMoney fm,
+									Field f
+								WHERE
+									fm.Deleted != 1
+								AND f.Deleted !=1
+								AND fm.PayStatus = 1
+								AND fm.FieldName=f.Name
+								 
+								GROUP BY
+									f.FieldID,
+									fm.PayTime
+					) total
+			 
+				GROUP BY
+					year (total.dates),total.FieldID
+		)lists
+		
+		WHERE lists.m=#{year,jdbcType=VARCHAR}
+		AND	lists.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY lists.m,lists.FieldID  	
+  	
+  	</select>
+  	
+  	<select id="selectProfitStatisticsByYearAndFieldId" resultType="com.hsd.vo.StatisticsPredictAndReality">
+	SELECT sum(cast (totals.predict1-totals.predict2 as DECIMAL(18,2))) as predict,sum(cast (totals.reality1-totals.reality2 as DECIMAL(18,2))) as reality,totals.m,totals.FieldID,'盈利统计' statistic FROM(
+		SELECT 					sum(cast (list.predict as DECIMAL(18,2))) predict1,sum(cast (list.reality as DECIMAL(18,2))) reality1,0 predict2,0 reality2,list.m,list.FieldID FROM (
+			SELECT
+				0 predict,
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,year(c.RealityMCDate) m,f.FieldID
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1
+		 
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY year(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT 0 predict,sum(cast (p.money as DECIMAL(18,2))) reality,year(p.[date]) m,f.FieldID FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+			 
+			
+			GROUP BY year(p.[date]),f.FieldID
+			
+			UNION ALL
+			SELECT sum(cast(r.predictIncome as DECIMAL(18,2))) predict,0 reality,year(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+			WHERE r.flag=0 and f.Deleted!=1 AND r.FieldID=f.FieldID 
+			GROUP BY year(r.createDate),f.FieldID
+			)list
+			GROUP BY list.m,list.FieldID	
+			
+			
+			UNION ALL
+			
+			SELECT 0 predict1, 0 reality1,sum(cast (lists.predict as DECIMAL(18,2))) predict2,sum(cast (lists.reality as DECIMAL(18,2))) reality2,lists.m,lists.FieldID FROM (
+				SELECT sum(cast (r.ExpensesReimbursementRedLine as DECIMAL(18,2))+cast (r.subscribeRedLine+r.ApplyRedLine as DECIMAL(18,2))) predict,0 reality,year(r.createDate) m,f.FieldID FROM RedLine r,Field f 
+				WHERE  r.flag=0 AND f.Deleted!=1
+				AND r.FieldID=f.FieldID
+			 
+				GROUP BY year(r.createDate),f.FieldID
+				
+			UNION ALL 
+			
+				SELECT
+						0 predict,SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS reality,year (total.dates) m,total.FieldID
+				FROM
+						(
+							SELECT
+								SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+								0 num2,
+								0 num3,
+								f.FieldID,
+								e.PayTime dates
+							FROM
+								ExpensesReimbursement e,
+								Field f
+							WHERE
+								e.Deleted != 1
+							AND e.PayStatus = 1
+							AND f.Deleted != 1
+							AND e.FieldID = f.FieldID
+							 
+							GROUP BY
+								f.FieldID,
+								e.PayTime
+							UNION ALL
+								SELECT
+									0 num1,
+									SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+									0 num3,
+									f.FieldID,
+									w.createDate dates
+								FROM
+									wageCalculation w,
+									Field f
+								WHERE
+									w.flag=0 
+								AND f.Deleted != 1
+								AND w.fieldId = f.FieldID
+							 
+								GROUP BY
+									f.FieldID,
+									w.createDate
+								UNION ALL
+									SELECT
+										0 num1,
+										0 num2,
+										SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+										f.FieldID FieldID,
+										fm.PayTime dates
+									FROM
+										FieldMoney fm,
+										Field f
+									WHERE
+										fm.Deleted != 1
+									AND f.Deleted !=1
+									AND fm.PayStatus = 1
+									AND fm.FieldName=f.Name
+									 
+									GROUP BY
+										f.FieldID,
+										fm.PayTime
+						) total
+				 
+					GROUP BY
+						year (total.dates),total.FieldID
+			)lists
+			GROUP BY lists.m,lists.FieldID
+			)totals
+			WHERE totals.m=#{year,jdbcType=VARCHAR}
+			AND	totals.FieldID=#{fieldId,jdbcType=VARCHAR}
+			GROUP BY totals.m,totals.FieldID
+  	</select>
+  	
+  	<select id="selectMonthStatementIncomeCounts" resultType="com.hsd.vo.CostCountVo">
+		SELECT sum(cast (list.reality as DECIMAL(18,2))) reality,list.m,list.FieldID,list.cost FROM (
+			SELECT
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,month(c.RealityMCDate) m,f.FieldID,'合同' cost
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1
+			AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY month(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT sum(cast (p.money as DECIMAL(18,2))) reality,month(p.[date]) m,f.FieldID ,p.genre cost FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+			AND YEAR (p.[date]) = YEAR (GETDATE())
+			
+			GROUP BY month(p.[date]),f.FieldID,p.genre
+		)list
+		WHERE list.m =#{month,jdbcType=VARCHAR} 
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID,list.cost 
+  	
+  	</select>
+  	
+  	<select id="selectYearStatementIncomeCounts" resultType="com.hsd.vo.CostCountVo">
+
+		SELECT sum(cast (list.reality as DECIMAL(18,2))) reality,list.m,list.FieldID,list.cost FROM (
+			SELECT
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,year(c.RealityMCDate) m,f.FieldID,'合同' cost
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1	 
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY year(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT sum(cast (p.money as DECIMAL(18,2))) reality,year(p.[date]) m,f.FieldID ,p.genre cost FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+			GROUP BY year(p.[date]),f.FieldID,p.genre
+		)list
+		WHERE 
+		list.m =#{year,jdbcType=VARCHAR} 
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID,list.cost 
+  	
+  	</select>
+  	
+  	
+  	
+  	<select id="selectMonthStatementIncomeDatas" resultType="com.hsd.vo.IncomeFeeVo">
+		SELECT sum(cast (list.reality as DECIMAL(18,2))) paymentTotal,list.m,list.FieldID,list.cost,list.dates,list.userPaymentTotal FROM (
+			SELECT
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,month(c.RealityMCDate) m,f.FieldID,'合同' cost,'' dates,'' userPaymentTotal 
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1
+			AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY month(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT sum(cast (p.money as DECIMAL(18,2))) reality,month(p.[date]) m,f.FieldID ,p.genre cost,p.[date] dates, count(1) userPaymentTotal FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+			AND YEAR (p.[date]) = YEAR (GETDATE())
+			
+			GROUP BY month(p.[date]),f.FieldID,p.genre,p.[date]
+		)list
+		WHERE 
+		list.m =#{month,jdbcType=VARCHAR} 
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		AND	list.cost=#{feeName,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID,list.cost,list.dates,list.userPaymentTotal  	
+  	
+  	</select>
+  	
+  	<select id="selectYearStatementIncomeDatas" resultType="com.hsd.vo.IncomeFeeVo">
+		SELECT sum(cast (list.reality as DECIMAL(18,2))) paymentTotal,list.m dates,list.FieldID,list.cost,list.userPaymentTotal FROM (
+			SELECT
+				sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,year(c.RealityMCDate) m,f.FieldID,'合同' cost,'' userPaymentTotal 
+			FROM
+				ContractPay c
+			INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+			WHERE
+				C.Deleted != 1			 
+			AND c.RealityMCDate IS NOT NULL
+			GROUP BY year(c.RealityMCDate),f.FieldID
+			
+			UNION ALL
+			
+			SELECT sum(cast (p.money as DECIMAL(18,2))) reality,year(p.[date]) m,f.FieldID ,p.genre cost, count(1) userPaymentTotal FROM projectIncome p,Field f
+			WHERE 
+			p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID		
+			GROUP BY year(p.[date]),f.FieldID,p.genre,p.[date]
+		)list
+		WHERE 
+		list.m =#{year,jdbcType=VARCHAR} 
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		AND	list.cost=#{feeName,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID,list.cost,list.userPaymentTotal  	
+  	
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	<select id="selectMonthStatementInjectCounts" resultType="com.hsd.vo.CostCountVo">
+SELECT 
+	lists.cost,
+	sum(cast (lists.reality as DECIMAL(18,2))) reality,
+	lists.m,
+	lists.FieldID 
+FROM (
+		
+			SELECT
+					cost,SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS reality,MONTH (total.dates) m,total.FieldID
+			FROM
+					(
+						SELECT
+							ei.ExpenseName cost,
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.FieldID,
+							e.PayTime dates
+						FROM
+							ExpensesReimbursement e,
+							Field f,
+							ExpensesReimbursementItem ei
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						AND e.ID=ei.ExpensesReimbursementID
+						AND YEAR (e.PayTime) = YEAR (GETDATE())
+						AND ei.ExpenseName in('交通费','办公费','业务费') 
+						GROUP BY
+							ei.ExpenseName,
+							f.FieldID,
+							e.PayTime
+						UNION ALL
+						SELECT
+							'其他' cost,
+							0 num1,
+							0 num2,
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num3,
+							f.FieldID,
+							e.PayTime dates
+						FROM
+							ExpensesReimbursement e,
+							Field f,
+							ExpensesReimbursementItem ei
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						AND e.ID=ei.ExpensesReimbursementID
+						AND YEAR (e.PayTime) = YEAR (GETDATE())
+						AND ei.ExpenseName not in('交通费','办公费','业务费') 
+						GROUP BY
+							ei.ExpenseName,
+							f.FieldID,
+							e.PayTime
+						UNION ALL
+							SELECT
+								'员工工资' cost,
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.FieldID,
+								w.createDate dates
+							FROM
+								wageCalculation w,
+								Field f
+							WHERE
+								w.flag=0 
+							AND f.Deleted != 1
+							AND w.fieldId = f.FieldID
+							AND YEAR (w.createDate) = YEAR (GETDATE())
+							GROUP BY
+								f.FieldID,
+								w.createDate
+							UNION ALL
+								SELECT
+									'其他' cost,
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									f.FieldID FieldID,
+									fm.PayTime dates
+								FROM
+									FieldMoney fm,
+									Field f
+								WHERE
+									fm.Deleted != 1
+								AND f.Deleted !=1
+								AND fm.PayStatus = 1
+								AND fm.FieldName=f.Name
+								AND YEAR (fm.PayTime) = YEAR (GETDATE())
+								GROUP BY
+									f.FieldID,
+									fm.PayTime
+					) total
+				WHERE 
+					YEAR (total.dates) = YEAR (GETDATE())
+				GROUP BY
+					MONTH (total.dates),total.FieldID,total.cost
+		)lists
+
+		WHERE lists.m=#{month,jdbcType=VARCHAR}
+		AND	lists.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY lists.m,lists.FieldID,lists.cost  	  	
+  	
+  	</select>
+  	
+  	<select id="getYearStatementInjectCounts" resultType="com.hsd.vo.CostCountVo">
+SELECT 
+	lists.cost,
+	sum(cast (lists.reality as DECIMAL(18,2))) reality,
+	lists.m,
+	lists.FieldID 
+FROM (
+		
+			SELECT
+					cost,SUM (cast (num1 as DECIMAL(18,2))) + SUM (cast (num2 as DECIMAL(18,2))) + SUM (cast (num3 as DECIMAL(18,2))) AS reality,year (total.dates) m,total.FieldID
+			FROM
+					(
+						SELECT
+							ei.ExpenseName cost,
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num1,
+							0 num2,
+							0 num3,
+							f.FieldID,
+							e.PayTime dates
+						FROM
+							ExpensesReimbursement e,
+							Field f,
+							ExpensesReimbursementItem ei
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						AND e.ID=ei.ExpensesReimbursementID
+					
+						AND ei.ExpenseName in('交通费','办公费','业务费') 
+						GROUP BY
+							ei.ExpenseName,
+							f.FieldID,
+							e.PayTime
+						UNION ALL
+						SELECT
+							'其他' cost,
+							0 num1,
+							0 num2,
+							SUM (cast (e.Amount as DECIMAL(18,2))) AS num3,
+							f.FieldID,
+							e.PayTime dates
+						FROM
+							ExpensesReimbursement e,
+							Field f,
+							ExpensesReimbursementItem ei
+						WHERE
+							e.Deleted != 1
+						AND e.PayStatus = 1
+						AND f.Deleted != 1
+						AND e.FieldID = f.FieldID
+						AND e.ID=ei.ExpensesReimbursementID
+		
+						AND ei.ExpenseName not in('交通费','办公费','业务费') 
+						GROUP BY
+							ei.ExpenseName,
+							f.FieldID,
+							e.PayTime
+						UNION ALL
+							SELECT
+								'员工工资' cost,
+								0 num1,
+								SUM (cast (w.basePay as DECIMAL(18,2))+cast (w.performancePay as DECIMAL(18,2))+cast (w.otherWelfare as DECIMAL(18,2))) num2,
+								0 num3,
+								f.FieldID,
+								w.createDate dates
+							FROM
+								wageCalculation w,
+								Field f
+							WHERE
+								w.flag=0 
+							AND f.Deleted != 1
+							AND w.fieldId = f.FieldID
+				
+							GROUP BY
+								f.FieldID,
+								w.createDate
+							UNION ALL
+								SELECT
+									'其他' cost,
+									0 num1,
+									0 num2,
+									SUM (cast (fm.Total as DECIMAL(18,2))) num3,
+									f.FieldID FieldID,
+									fm.PayTime dates
+								FROM
+									FieldMoney fm,
+									Field f
+								WHERE
+									fm.Deleted != 1
+								AND f.Deleted !=1
+								AND fm.PayStatus = 1
+								AND fm.FieldName=f.Name
+								
+								GROUP BY
+									f.FieldID,
+									fm.PayTime
+					) total
+
+				GROUP BY
+					year (total.dates),total.FieldID,total.cost
+		)lists
+
+		WHERE lists.m=#{year,jdbcType=VARCHAR}
+		AND	lists.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY lists.m,lists.FieldID,lists.cost  	  		
+  	</select>
+  	
+  	<select id="selectMonthStatementInjectDatasByStaffWage" resultType="com.hsd.vo.StaffWageAndReimbursementVo">
+		SELECT 
+			DISTINCT
+			list.FieldID,
+			list.name name,
+			list.riGongZi riGongZi,
+			list.shiFaGongZi shiFaGongZi,
+			CASE  list.shangBanQingKuan
+		       WHEN '1' THEN '迟到'
+		       WHEN '2' THEN '早退'
+		       ELSE '正常' END  as shangBanQingKuan,
+		   CASE  
+		       WHEN (cast(list.riGongZi AS DECIMAL(18,2))>cast(list.shiFaGongZi AS DECIMAL(18,2))) THEN '-'+cast(list.riGongZi-list.shiFaGongZi as varchar(20))
+		       ELSE (cast(list.shiFaGongZi AS DECIMAL(18,2))-cast(list.riGongZi AS DECIMAL(18,2))) END  as jiagnFa,
+			list.riQi date
+		
+		 FROM (
+		SELECT
+			f.FieldID,
+			u.Name name,
+			(select day(dateadd(ms,-3,DATEADD(m, DATEDIFF(m,0,getdate())+1,0)))) benYueTianShu,
+			sum(cast(w.basePay AS DECIMAL(18,2))+cast(w.performancePay AS DECIMAL(18,2))+cast(w.otherWelfare AS DECIMAL(18,2)))/w.shouldWorkDays riGongZi,
+			sum(cast(w.basePay AS DECIMAL(18,2))+cast(w.performancePay AS DECIMAL(18,2))+cast(w.otherWelfare AS DECIMAL(18,2)))/w.shouldWorkDays*w.realityWorkDays/w.shouldWorkDays shiFaGongZi,
+			c.CheckResultStatus shangBanQingKuan,
+			w.shouldWorkDays yingShangbanTianShu,
+			w.realityWorkDays shiJiShangBanTianShu,
+			w.basePay jiBenGongZi,
+			w.performancePay jiXiaoGongZi,
+			w.otherWelfare qiTaFuLi,
+		(SELECT CONVERT(varchar(100), c.CheckinTime, 23)) riQi
+		FROM
+			Checkin c,
+			wageCalculation w,
+			[User] u,
+			Field f
+		WHERE 
+			w.flag=0 
+		AND u.Deleted !=1
+		AND f.Deleted!=1
+		AND c.UserID=w.userId
+		AND c.UserID=u.UserID
+		AND u.fieldId=f.fieldId
+		AND YEAR (c.CheckinTime) = YEAR (GETDATE())
+		GROUP BY 
+			f.FieldID,
+			u.name,
+		w.shouldWorkDays,
+		w.realityWorkDays,
+		c.CheckResultStatus,
+		w.basePay,
+		w.performancePay,
+		w.otherWelfare,
+		c.CheckinTime
+			 
+		
+		)list
+		
+		WHERE list.riQi like '%'+#{date,jdbcType=VARCHAR}+'%'
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY 
+			list.FieldID,
+			list.name,
+			list.riGongZi,
+			list.shiFaGongZi,
+			list.shangBanQingKuan,
+			list.riQi
+		
+  	
+  	</select>
+  	
+  	
+  	<select id="selectMonthStatementInjectDatasByReimbursement" resultType="com.hsd.vo.StaffWageAndReimbursementVo">
+		SELECT 
+			u.Name name,
+			SUBSTRING(CONVERT(varchar(100), er.PayTime, 24),0,6) payTime,
+			er.Amount amount,
+			ei.ExpenseName,
+			ei.Remark 'use'
+		FROM ExpensesReimbursement er,ExpensesReimbursementItem ei,Field f,[User] u
+		WHERE 
+		er.Deleted!=1 and f.Deleted !=1 AND u.Deleted!=1 
+		AND er.ID=ei.ExpensesReimbursementID
+		AND er.FieldID=f.FieldID
+		AND er.UserID=u.UserID
+		AND  er.PayTime is NOT NULL
+		AND ei.ExpenseName LIKE '%'+#{feeName,jdbcType=VARCHAR}+'%'
+		AND YEAR (er.PayTime) = YEAR (GETDATE())
+		AND er.FieldID=#{fieldId,jdbcType=VARCHAR}
+		AND CONVERT(varchar(100), er.PayTime, 23) LIKE '%'+#{date,jdbcType=VARCHAR}+'%'  	
+  	
+  	
+  	</select>
+  	
+  	
+  	
+  	
+  	<select id="selectMonthStatementProfitCounts" resultType="com.hsd.vo.CostCountVo">
+		SELECT 
+			list.cost,
+			sum(cast (list.reality as DECIMAL(18,2))) reality,list.m,list.FieldID FROM (
+					SELECT
+						'合同' cost,
+						sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,month(c.RealityMCDate) m,f.FieldID
+					FROM
+						ContractPay c
+					INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+					WHERE
+						C.Deleted != 1
+					AND YEAR (c.RealityMCDate) = YEAR (GETDATE())
+					AND c.RealityMCDate IS NOT NULL
+					GROUP BY month(c.RealityMCDate),f.FieldID
+					
+					UNION ALL
+					
+					SELECT p.genre cost,sum(cast (p.money as DECIMAL(18,2))) reality,month(p.[date]) m,f.FieldID FROM projectIncome p,Field f
+					WHERE 
+					p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+					AND YEAR (p.[date]) = YEAR (GETDATE())
+					
+					GROUP BY month(p.[date]),f.FieldID,p.genre
+				
+		)list
+		WHERE list.m =#{month,jdbcType=VARCHAR} 
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID,list.cost	  	
+  	</select>
+  	
+  	
+  	<select id="selectYearStatementProfitCounts" resultType="com.hsd.vo.CostCountVo">
+		SELECT 
+			list.cost,
+			sum(cast (list.reality as DECIMAL(18,2))) reality,list.m,list.FieldID FROM (
+					SELECT
+						'合同' cost,
+						sum(cast (c.RealityMC as DECIMAL(18,2))) + sum(cast (c.Subtract as DECIMAL(18,2))) + sum(cast (c.AgencyFund as DECIMAL(18,2))) reality,year(c.RealityMCDate) m,f.FieldID
+					FROM
+						ContractPay c
+					INNER JOIN Field f ON c.FieldID = f.FieldID AND f.Deleted!=1
+					WHERE
+						C.Deleted != 1
+					 
+					AND c.RealityMCDate IS NOT NULL
+					GROUP BY year(c.RealityMCDate),f.FieldID
+					
+					UNION ALL
+					
+					SELECT p.genre cost,sum(cast (p.money as DECIMAL(18,2))) reality,year(p.[date]) m,f.FieldID FROM projectIncome p,Field f
+					WHERE 
+					p.flag=0 AND f.Deleted!=1 and p.fieldID=f.FieldID
+					 
+					
+					GROUP BY year(p.[date]),f.FieldID,p.genre
+				
+		)list
+		WHERE list.m =#{year,jdbcType=VARCHAR} 
+		AND list.FieldID=#{fieldId,jdbcType=VARCHAR}
+		GROUP BY list.m,list.FieldID,list.cost	  	
+  	</select>
+  	
+</mapper>

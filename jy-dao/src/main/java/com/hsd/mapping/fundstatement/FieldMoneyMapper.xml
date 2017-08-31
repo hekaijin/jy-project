@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsd.dao.fundstatement.FieldMoneyMapper" >
+  <resultMap id="BaseResultMap" type="com.hsd.entity.fundstatement.FieldMoney" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="UserID" property="userid" jdbcType="INTEGER" />
+    <result column="FieldName" property="fieldname" jdbcType="NVARCHAR" />
+    <result column="Total" property="total" jdbcType="DECIMAL" />
+    <result column="Remark" property="remark" jdbcType="NVARCHAR" />
+    <result column="CheckStatus" property="checkstatus" jdbcType="INTEGER" />
+    <result column="PayStatus" property="paystatus" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="NVARCHAR" />
+    <result column="Deleted" property="deleted" jdbcType="BIT" />
+    <result column="SeqNo" property="seqno" jdbcType="NVARCHAR" />
+    <result column="ProcessID" property="processid" jdbcType="INTEGER" />
+    <result column="PayTime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="PayUser" property="payuser" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, UserID, FieldName, Total, Remark, CheckStatus, PayStatus, CreateTime, Deleted, 
+    SeqNo, ProcessID, PayTime, PayUser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hsd.entity.fundstatement.FieldMoneyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from FieldMoney
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from FieldMoney
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from FieldMoney
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsd.entity.fundstatement.FieldMoney" >
+    insert into FieldMoney (ID, UserID, FieldName, 
+      Total, Remark, CheckStatus, 
+      PayStatus, CreateTime, Deleted, 
+      SeqNo, ProcessID, PayTime, 
+      PayUser)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{fieldname,jdbcType=NVARCHAR}, 
+      #{total,jdbcType=DECIMAL}, #{remark,jdbcType=NVARCHAR}, #{checkstatus,jdbcType=INTEGER}, 
+      #{paystatus,jdbcType=INTEGER}, #{createtime,jdbcType=NVARCHAR}, #{deleted,jdbcType=BIT}, 
+      #{seqno,jdbcType=NVARCHAR}, #{processid,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, 
+      #{payuser,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsd.entity.fundstatement.FieldMoney" >
+    insert into FieldMoney
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="fieldname != null" >
+        FieldName,
+      </if>
+      <if test="total != null" >
+        Total,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="checkstatus != null" >
+        CheckStatus,
+      </if>
+      <if test="paystatus != null" >
+        PayStatus,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="deleted != null" >
+        Deleted,
+      </if>
+      <if test="seqno != null" >
+        SeqNo,
+      </if>
+      <if test="processid != null" >
+        ProcessID,
+      </if>
+      <if test="paytime != null" >
+        PayTime,
+      </if>
+      <if test="payuser != null" >
+        PayUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="fieldname != null" >
+        #{fieldname,jdbcType=NVARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="seqno != null" >
+        #{seqno,jdbcType=NVARCHAR},
+      </if>
+      <if test="processid != null" >
+        #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payuser != null" >
+        #{payuser,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsd.entity.fundstatement.FieldMoney" >
+    update FieldMoney
+    <set >
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="fieldname != null" >
+        FieldName = #{fieldname,jdbcType=NVARCHAR},
+      </if>
+      <if test="total != null" >
+        Total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        CheckStatus = #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        PayStatus = #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleted != null" >
+        Deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="seqno != null" >
+        SeqNo = #{seqno,jdbcType=NVARCHAR},
+      </if>
+      <if test="processid != null" >
+        ProcessID = #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null" >
+        PayTime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payuser != null" >
+        PayUser = #{payuser,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsd.entity.fundstatement.FieldMoney" >
+    update FieldMoney
+    set UserID = #{userid,jdbcType=INTEGER},
+      FieldName = #{fieldname,jdbcType=NVARCHAR},
+      Total = #{total,jdbcType=DECIMAL},
+      Remark = #{remark,jdbcType=NVARCHAR},
+      CheckStatus = #{checkstatus,jdbcType=INTEGER},
+      PayStatus = #{paystatus,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=NVARCHAR},
+      Deleted = #{deleted,jdbcType=BIT},
+      SeqNo = #{seqno,jdbcType=NVARCHAR},
+      ProcessID = #{processid,jdbcType=INTEGER},
+      PayTime = #{paytime,jdbcType=TIMESTAMP},
+      PayUser = #{payuser,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

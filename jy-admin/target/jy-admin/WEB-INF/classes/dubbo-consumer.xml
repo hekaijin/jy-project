@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="jy-admin" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<!-- 测试环境注册中心地址 -->
+<!-- 	<dubbo:registry protocol="zookeeper" address="zookeeper://192.168.1.124:2181" /> -->
+	<dubbo:registry protocol="zookeeper" address="zookeeper://120.76.239.30:2181" />
+	
+	 
+	<dubbo:reference interface="com.hsd.service.borrow.BorrowService" id="borrowService" timeout="900000" check="false"/>
+	<dubbo:reference interface="com.hsd.service.contractpay.ContractPayService" id="contractPayService"  timeout="900000" check="false"/>
+	<dubbo:reference interface="com.hsd.service.expensesreimbursement.ExpensesReimbursementService" id="expensesReimbursementService"  timeout="900000" check="false"/>
+	<dubbo:reference interface="com.hsd.service.field.FieldService" id="fieldService"  timeout="900000" check="false"/>
+	<dubbo:reference interface="com.hsd.service.fieldmoney.FieldMoneyService" id="fieldMoneyService"  timeout="900000" check="false"/>
+	<dubbo:reference interface="com.hsd.service.redline.ProjectIncomeService" id="projectIncomeService"  timeout="900000" check="false"/>
+	<dubbo:reference interface="com.hsd.service.redline.RedLineService" id="redLineService"  timeout="900000" check="false"/>
+	
+	
+</beans>  

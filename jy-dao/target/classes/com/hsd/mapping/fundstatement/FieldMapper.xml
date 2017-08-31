@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsd.dao.fundstatement.FieldMapper" >
+  <resultMap id="BaseResultMap" type="com.hsd.entity.fundstatement.Field" >
+    <id column="FieldID" property="fieldid" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="NVARCHAR" />
+    <result column="Order" property="order" jdbcType="INTEGER" />
+    <result column="Deleted" property="deleted" jdbcType="BIT" />
+    <result column="MangerId" property="mangerid" jdbcType="INTEGER" />
+    <result column="DirectorID" property="directorid" jdbcType="INTEGER" />
+    <result column="ID2" property="id2" jdbcType="INTEGER" />
+    <result column="PurchaseBudget" property="purchasebudget" jdbcType="DOUBLE" />
+    <result column="FieldTypeID" property="fieldtypeid" jdbcType="INTEGER" />
+    <result column="Address" property="address" jdbcType="NVARCHAR" />
+    <result column="Contact" property="contact" jdbcType="NVARCHAR" />
+    <result column="Phone" property="phone" jdbcType="NVARCHAR" />
+    <result column="PatrolInterval" property="patrolinterval" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FieldID, Name, Order, Deleted, MangerId, DirectorID, ID2, PurchaseBudget, FieldTypeID, 
+    Address, Contact, Phone, PatrolInterval
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hsd.entity.fundstatement.FieldExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from Field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Field
+    where FieldID = #{fieldid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Field
+    where FieldID = #{fieldid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsd.entity.fundstatement.Field" >
+    insert into Field (FieldID, Name, Order, 
+      Deleted, MangerId, DirectorID, 
+      ID2, PurchaseBudget, FieldTypeID, 
+      Address, Contact, Phone, 
+      PatrolInterval)
+    values (#{fieldid,jdbcType=INTEGER}, #{name,jdbcType=NVARCHAR}, #{order,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=BIT}, #{mangerid,jdbcType=INTEGER}, #{directorid,jdbcType=INTEGER}, 
+      #{id2,jdbcType=INTEGER}, #{purchasebudget,jdbcType=DOUBLE}, #{fieldtypeid,jdbcType=INTEGER}, 
+      #{address,jdbcType=NVARCHAR}, #{contact,jdbcType=NVARCHAR}, #{phone,jdbcType=NVARCHAR}, 
+      #{patrolinterval,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsd.entity.fundstatement.Field" >
+    insert into Field
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fieldid != null" >
+        FieldID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="order != null" >
+        Order,
+      </if>
+      <if test="deleted != null" >
+        Deleted,
+      </if>
+      <if test="mangerid != null" >
+        MangerId,
+      </if>
+      <if test="directorid != null" >
+        DirectorID,
+      </if>
+      <if test="id2 != null" >
+        ID2,
+      </if>
+      <if test="purchasebudget != null" >
+        PurchaseBudget,
+      </if>
+      <if test="fieldtypeid != null" >
+        FieldTypeID,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="contact != null" >
+        Contact,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="patrolinterval != null" >
+        PatrolInterval,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fieldid != null" >
+        #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="order != null" >
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="mangerid != null" >
+        #{mangerid,jdbcType=INTEGER},
+      </if>
+      <if test="directorid != null" >
+        #{directorid,jdbcType=INTEGER},
+      </if>
+      <if test="id2 != null" >
+        #{id2,jdbcType=INTEGER},
+      </if>
+      <if test="purchasebudget != null" >
+        #{purchasebudget,jdbcType=DOUBLE},
+      </if>
+      <if test="fieldtypeid != null" >
+        #{fieldtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=NVARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=NVARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="patrolinterval != null" >
+        #{patrolinterval,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsd.entity.fundstatement.Field" >
+    update Field
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="order != null" >
+        Order = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        Deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="mangerid != null" >
+        MangerId = #{mangerid,jdbcType=INTEGER},
+      </if>
+      <if test="directorid != null" >
+        DirectorID = #{directorid,jdbcType=INTEGER},
+      </if>
+      <if test="id2 != null" >
+        ID2 = #{id2,jdbcType=INTEGER},
+      </if>
+      <if test="purchasebudget != null" >
+        PurchaseBudget = #{purchasebudget,jdbcType=DOUBLE},
+      </if>
+      <if test="fieldtypeid != null" >
+        FieldTypeID = #{fieldtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=NVARCHAR},
+      </if>
+      <if test="contact != null" >
+        Contact = #{contact,jdbcType=NVARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="patrolinterval != null" >
+        PatrolInterval = #{patrolinterval,jdbcType=INTEGER},
+      </if>
+    </set>
+    where FieldID = #{fieldid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsd.entity.fundstatement.Field" >
+    update Field
+    set Name = #{name,jdbcType=NVARCHAR},
+      Order = #{order,jdbcType=INTEGER},
+      Deleted = #{deleted,jdbcType=BIT},
+      MangerId = #{mangerid,jdbcType=INTEGER},
+      DirectorID = #{directorid,jdbcType=INTEGER},
+      ID2 = #{id2,jdbcType=INTEGER},
+      PurchaseBudget = #{purchasebudget,jdbcType=DOUBLE},
+      FieldTypeID = #{fieldtypeid,jdbcType=INTEGER},
+      Address = #{address,jdbcType=NVARCHAR},
+      Contact = #{contact,jdbcType=NVARCHAR},
+      Phone = #{phone,jdbcType=NVARCHAR},
+      PatrolInterval = #{patrolinterval,jdbcType=INTEGER}
+    where FieldID = #{fieldid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="selectFieldIdAndName" resultMap="BaseResultMap">
+  	select 
+  		FieldID,
+  		Name
+  	FROM
+  		Field 
+  	WHERE
+  		Deleted !=1
+  
+  </select>
+</mapper>

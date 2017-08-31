@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+
+
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="service-user" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<!-- 测试环境 -->
+	<!--  	<dubbo:registry address="zookeeper://192.168.1.124:2181" /> -->
+	<!-- 生产环境 -->
+	<dubbo:registry address="zookeeper://120.76.239.30:2181" />
+
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<bean id="borrowService" class="com.hsd.service.impl.borrow.BorrowServiceImpl" />	
+	<bean id="contractPayService" class="com.hsd.service.impl.contractpay.ContractPayServiceImpl" />	
+	<bean id="expensesReimbursementService" class="com.hsd.service.impl.expensesreimbursement.ExpensesReimbursementServiceImpl" />	
+	<bean id="fieldService" class="com.hsd.service.impl.field.FieldServiceImpl" />	
+	<bean id="fieldMoneyService" class="com.hsd.service.impl.fieldmoney.FieldmoneyServiceImpl" />	
+	<bean id="projectIncomeService" class="com.hsd.service.impl.redline.ProjectIncomeServiceImpl" />	
+	<bean id="redLineService" class="com.hsd.service.impl.redline.RedLineServiceImpl" />	
+	
+	
+	
+	<dubbo:service interface="com.hsd.service.borrow.BorrowService" ref="borrowService" />
+	<dubbo:service interface="com.hsd.service.contractpay.ContractPayService" ref="contractPayService" />
+	<dubbo:service interface="com.hsd.service.expensesreimbursement.ExpensesReimbursementService" ref="expensesReimbursementService" />
+	<dubbo:service interface="com.hsd.service.field.FieldService" ref="fieldService" />
+	<dubbo:service interface="com.hsd.service.fieldmoney.FieldMoneyService" ref="fieldMoneyService" />
+	<dubbo:service interface="com.hsd.service.redline.ProjectIncomeService" ref="projectIncomeService" />
+	<dubbo:service interface="com.hsd.service.redline.RedLineService" ref="redLineService" />
+</beans>  

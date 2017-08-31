@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsd.dao.fundstatement.RedLineMapper" >
+  <resultMap id="BaseResultMap" type="com.hsd.entity.fundstatement.RedLine" >
+    <id column="RedLineID" property="redlineid" jdbcType="VARCHAR" />
+    <result column="ExpensesReimbursementRedLine" property="expensesreimbursementredline" jdbcType="DECIMAL" />
+    <result column="BorrowRedLine" property="borrowredline" jdbcType="DECIMAL" />
+    <result column="ApplyRedLine" property="applyredline" jdbcType="DECIMAL" />
+    <result column="userId" property="userId" jdbcType="VARCHAR" />
+    <result column="FieldID" property="fieldid" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="predictIncome" property="predictIncome" jdbcType="DECIMAL" />
+    <result column="subscribeRedLine" property="subscribeRedLine" jdbcType="DECIMAL" />
+    
+  </resultMap>
+  
+  <resultMap id="BaseResultMap2" type="com.hsd.vo.RedLineVo" >
+    <id column="RedLineID" property="redlineid" jdbcType="VARCHAR" />
+    <result column="ExpensesReimbursementRedLine" property="expensesreimbursementredline" jdbcType="DECIMAL" />
+    <result column="BorrowRedLine" property="borrowredline" jdbcType="DECIMAL" />
+    <result column="ApplyRedLine" property="applyredline" jdbcType="DECIMAL" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="FieldID" property="fieldid" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="Name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="predictIncome" property="predictIncome" jdbcType="DECIMAL" />
+    <result column="subscribeRedLine" property="subscribeRedLine" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RedLineID, ExpensesReimbursementRedLine, BorrowRedLine, ApplyRedLine, userId, 
+    FieldID, createDate, remark, flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hsd.entity.fundstatement.RedLineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from RedLine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from RedLine
+    where RedLineID = #{redlineid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from RedLine
+    where RedLineID = #{redlineid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hsd.entity.fundstatement.RedLine" >
+    insert into RedLine (RedLineID, ExpensesReimbursementRedLine, 
+      BorrowRedLine, ApplyRedLine, userId, 
+      FieldID, createDate, remark, 
+      flag)
+    values (#{redlineid,jdbcType=VARCHAR}, #{expensesreimbursementredline,jdbcType=DECIMAL}, 
+      #{borrowredline,jdbcType=DECIMAL}, #{applyredline,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR}, 
+      #{fieldid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsd.entity.fundstatement.RedLine" >
+    insert into RedLine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="redlineid != null" >
+        RedLineID,
+      </if>
+      <if test="expensesreimbursementredline != null" >
+        ExpensesReimbursementRedLine,
+      </if>
+      <if test="borrowredline != null" >
+        BorrowRedLine,
+      </if>
+      <if test="applyredline != null" >
+        ApplyRedLine,
+      </if>
+      <if test="userId != null" >
+        userId,
+      </if>
+      <if test="fieldid != null" >
+        FieldID,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="predictIncome != null" >
+        predictIncome,
+      </if>
+      <if test="subscribeRedLine != null" >
+        subscribeRedLine,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="redlineid != null" >
+        #{redlineid,jdbcType=VARCHAR},
+      </if>
+      <if test="expensesreimbursementredline != null" >
+        #{expensesreimbursementredline,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowredline != null" >
+        #{borrowredline,jdbcType=DECIMAL},
+      </if>
+      <if test="applyredline != null" >
+        #{applyredline,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldid != null" >
+        #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="predictIncome != null" >
+        #{predictIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="subscribeRedLine != null" >
+        #{subscribeRedLine,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsd.entity.fundstatement.RedLine" >
+    update RedLine
+    <set >
+      <if test="expensesreimbursementredline != null" >
+        ExpensesReimbursementRedLine = #{expensesreimbursementredline,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowredline != null" >
+        BorrowRedLine = #{borrowredline,jdbcType=DECIMAL},
+      </if>
+      <if test="applyredline != null" >
+        ApplyRedLine = #{applyredline,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldid != null" >
+        FieldID = #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="predictIncome != null" >
+        predictIncome = #{predictIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="subscribeRedLine != null" >
+        subscribeRedLine = #{subscribeRedLine,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where RedLineID = #{redlineid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsd.entity.fundstatement.RedLine" >
+    update RedLine
+    set ExpensesReimbursementRedLine = #{expensesreimbursementredline,jdbcType=DECIMAL},
+      BorrowRedLine = #{borrowredline,jdbcType=DECIMAL},
+      ApplyRedLine = #{applyredline,jdbcType=DECIMAL},
+      userId = #{userId,jdbcType=VARCHAR},
+      FieldID = #{fieldid,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER}
+    where RedLineID = #{redlineid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <select id="selectRedLineList" resultMap="BaseResultMap2">
+    SELECT
+    *
+    FROM(
+
+    SELECT
+    f.Name,
+    r.RedLineID,
+    rr.ExpensesReimbursementRedLine,
+    rr.predictIncome,
+    rr.subscribeRedLine,
+    u.Name username,
+    rr.FieldID,
+    rr.createDate,
+    rr.remark
+
+    FROM
+    RedLine r
+    LEFT JOIN Field f ON r.FieldID = f.FieldID
+    AND f.Deleted != 1
+    LEFT JOIN [User] u ON r.userId = u.UserID
+    AND u.Deleted != 1
+    LEFT JOIN RedLineUpdateRecord rr ON r.RedLineID=rr.RedLineId
+    AND rr.flag=0 and rr.createDate in(SELECT MAX(rur.createDate) FROM RedLineUpdateRecord rur GROUP BY rur.RedLineID)
+    WHERE
+    r.flag = 0
+    AND rr.fieldId is not null
+
+    UNION ALL
+
+    SELECT
+    f.Name,
+    r.RedLineID,
+    r.ExpensesReimbursementRedLine,
+    r.predictIncome,
+    r.subscribeRedLine,
+    u.Name username,
+    r.FieldID,
+    r.createDate,
+    r.remark
+    FROM
+    RedLine r
+    LEFT JOIN Field f ON r.FieldID = f.FieldID
+    AND f.Deleted != 1
+    LEFT JOIN [User] u ON r.userId = u.UserID
+    AND u.Deleted != 1
+    WHERE
+    r.flag = 0
+    AND r.RedLineID NOT IN(SELECT rr.RedLineID FROM RedLineUpdateRecord rr WHERE rr.flag=0)
+    )list
+
+
+    <where>
+  		<if test="id !=null and id!='' ">
+  			AND list.RedLineID=#{id,jdbcType=VARCHAR}
+  		</if>
+  		<if test="fieldName !=null and fieldName!='' ">
+  			AND list.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+  		</if>
+    </where>
+    ORDER BY  list.createDate DESC
+  </select>
+  
+  
+  <select id="selectRedLineCount" resultType="int">
+	  SELECT count(1) FROM(
+            SELECT
+            *
+            FROM(
+
+            SELECT
+            f.Name,
+            r.RedLineID,
+            rr.ExpensesReimbursementRedLine,
+            rr.predictIncome,
+            rr.subscribeRedLine,
+            u.Name username,
+            rr.FieldID,
+            rr.createDate,
+            rr.remark
+
+            FROM
+            RedLine r
+            LEFT JOIN Field f ON r.FieldID = f.FieldID
+            AND f.Deleted != 1
+            LEFT JOIN [User] u ON r.userId = u.UserID
+            AND u.Deleted != 1
+            LEFT JOIN RedLineUpdateRecord rr ON r.RedLineID=rr.RedLineId
+            AND rr.flag=0 and rr.createDate in(SELECT MAX(rur.createDate) FROM RedLineUpdateRecord rur GROUP BY rur.RedLineID)
+            WHERE
+            r.flag = 0
+            AND rr.fieldId is not null
+
+            UNION ALL
+
+            SELECT
+            f.Name,
+            r.RedLineID,
+            r.ExpensesReimbursementRedLine,
+            r.predictIncome,
+            r.subscribeRedLine,
+            u.Name username,
+            r.FieldID,
+            r.createDate,
+            r.remark
+            FROM
+            RedLine r
+            LEFT JOIN Field f ON r.FieldID = f.FieldID
+            AND f.Deleted != 1
+            LEFT JOIN [User] u ON r.userId = u.UserID
+            AND u.Deleted != 1
+            WHERE
+            r.flag = 0
+            AND r.RedLineID NOT IN(SELECT rr.RedLineID FROM RedLineUpdateRecord rr WHERE rr.flag=0)
+            )list
+
+
+            <where>
+              <if test="id !=null and id!='' ">
+                AND list.RedLineID=#{id,jdbcType=VARCHAR}
+              </if>
+              <if test="fieldName !=null and fieldName!='' ">
+                AND list.Name LIKE '%'+#{fieldName,jdbcType=VARCHAR}+'%'
+              </if>
+            </where>
+	  	)a
+  </select>
+  
+  
+  
+  <update id="deleteByRedLineId">
+  	update RedLine set flag=1 where RedLineID=#{redLine,jdbcType=VARCHAR}
+  
+  </update>
+  
+  <select id="selectPermissionByUserId" resultType="string" statementType="CALLABLE">
+  	exec spGetUserMenuIntent #{userId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="selectFieldNameByUserId" resultType="string">
+  	SELECT f.Name FROM [User] u,Field f  WHERE  u.Deleted !=1 AND f.Deleted !=1 AND u.FieldID=f.FieldID AND u.UserID=#{userId,jdbcType=VARCHAR}
+  
+  </select>
+
+  <select id="selectFieldIDByUserId" resultType="string">
+    SELECT f.FieldID FROM [User] u,Field f  WHERE  u.Deleted !=1 AND f.Deleted !=1 AND u.FieldID=f.FieldID AND u.UserID=#{userId,jdbcType=VARCHAR}
+
+  </select>
+
+
+  <select id="selectRedLineRecord" resultType="com.hsd.vo.RedLineVo">
+    SELECT
+    top 10
+    r.RedLineID,
+    r.ExpensesReimbursementRedLine,
+    r.subscribeRedLine,
+    r.predictIncome,
+    u.Name username,
+    r.createDate,
+    r.remark
+    FROM
+    RedLineUpdateRecord r
+    LEFT JOIN [User] u ON r.userId = u.UserID
+    AND u.Deleted != 1
+    WHERE
+    r.flag = 0
+    <if test="redid !=null and redid!='' ">
+      AND r.RedLineID LIKE '%'+#{redid,jdbcType=VARCHAR}+'%'
+    </if>
+
+    ORDER BY r.createDate DESC
+
+  </select>
+</mapper>
